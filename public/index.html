@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta name="viewport" width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0>
+  <style>
+    * {
+      padding: 0;
+      margin: 0
+    }
+  </style>
+  <script src="libraries/pixi.min.js"></script>
+  <script src="libraries/tink.js"></script>
+
+
+</head>
+
+<body>
+  <script>
+    var app = new PIXI.Application();
+    app.renderer.view.style.position = "absolute";
+    app.renderer.view.style.display = "block";
+    app.renderer.autoResize = true;
+    app.renderer.resize(window.innerWidth, window.innerHeight);
+
+    document.body.appendChild(app.view);
+
+    var textureButton = PIXI.Texture.fromImage('images/up.png');
+    var textureButtonDown = PIXI.Texture.fromImage('images/down.png');
+    var textureButtonOver = PIXI.Texture.fromImage('images/over.png');
+
+    var button = new PIXI.Sprite(textureButton);
+    button.buttonMode = true;
+
+    button.anchor.set(0.5);
+    button.x = app.screen.width / 2;
+    button.y = app.screen.height - 200;
+
+    button.interactive = true;
+    button.buttonMode = true;
+
+    button
+      .on('pointerdown', onButtonDown)
+      .on('pointerup', onButtonUp)
+      .on('pointerupoutside', onButtonUp)
+      .on('pointerover', onButtonOver)
+      .on('pointerout', onButtonOut);
+
+    app.stage.addChild(button);
+
+    function onButtonDown() {
+      this.isdown = true;
+      this.texture = textureButtonDown;
+      this.alpha = 1;
+      console.log('down')
+      this.scale.set(1.2)
+    }
+
+    function onButtonUp() {
+      this.isdown = false;
+      if (this.isOver) {
+        this.texture = textureButtonOver;
+        console.log('up')
+        this.scale.set(1.0)
+      } else {
+        this.texture = textureButton;
+      }
+    }
+
+    function onButtonOver() {
+      this.isOver = true;
+      if (this.isdown) {
+        return;
+      }
+      console.log('over')
+      this.texture = textureButtonOver;
+    }
+
+    function onButtonOut() {
+      this.isOver = false;
+      if (this.isdown) {
+        return;
+      }
+      this.texture = textureButton;
+      console.log('out')
+    }
+  </script>
+</body>
+
+</html>
