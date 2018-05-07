@@ -1,19 +1,14 @@
+const io = require('socket.io')();
 
-var express = require('express');
-var socket = require('socket.io');
+io.on('connection', (client) => {
+  client.on('subscribeToTimer', (interval) => {
+    console.log('client is subscribing to timer with interval ', interval);
+    setInterval(() => {
+      client.emit('timer', new Date());
+    }, interval);
+  });
+});
 
-var app = express();
-var server = app.listen(3000);
-
-app.use(express.static('public'));
-
-console.log("My socket server is running");
-
-var io = socket(server);
-
-io.sockets.on('connection', newConnection);
-
-function newConnection(socket) {
-    console.log("new connection " + socket.id);
-}
-
+const port = 8000;
+io.listen(port);
+console.log('listening on port ', port);
