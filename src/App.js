@@ -1,25 +1,18 @@
 import React, { Component } from 'react';
-import { subscribeToTimer } from './api';
+import {HashRouter as Router, Route, Switch} from 'react-router-dom';
+import LoginPage from './LoginPage';
+import StartPage from './StartPage';
 
 class App extends Component {
-  constructor(props) {
-    super(props);
-    subscribeToTimer((err, timestamp) => this.setState({ 
-      timestamp 
-    })); 
-  }
-
-  state = {
-    timestamp: 'no timestamp yet'
-  };
 
  render() {
   return (
-    <div className="App">
-      <p className="App-intro">
-      This is the timer value: {this.state.timestamp}
-      </p>
-    </div>
+    <Router>
+      <Switch>
+      <Route path="/" exact component={LoginPage}/>
+      <Route path="/main" exact component={StartPage} />
+      </Switch>
+    </Router>
   );
 }
 }

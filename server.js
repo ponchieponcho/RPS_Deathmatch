@@ -1,14 +1,21 @@
 const io = require('socket.io')();
+const port = 8000;
 
-io.on('connection', (client) => {
-  client.on('subscribeToTimer', (interval) => {
-    console.log('client is subscribing to timer with interval ', interval);
-    setInterval(() => {
-      client.emit('timer', new Date());
-    }, interval);
-  });
+let users = [];
+
+io.on('connection', (socket) => {
+  console.log('Client id: ',socket.id)
+  io.emit('clientid', socket.id)
+  socket.on('username', username => {
+    console.log('emitted username: ',username);
+    users.push({userid:socket.id, username:username})
+    console.log('users:', users)
+  })
+})
+
+io.on('disconnect', function () {
+  io.emit('User Disconnected');
 });
 
-const port = 8000;
 io.listen(port);
-console.log('listening on port ', port);
+console.log('Listening on port ', port);
