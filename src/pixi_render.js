@@ -25,7 +25,7 @@ let app = new Application({
 
 document.body.appendChild(app.view);
 
-export let makeUsername = (name) => {
+export let makeUsername = (name, id) => {
   let style = new PIXI.TextStyle({
     fontFamily: 'Arial',
     fontSize: 36,
@@ -43,11 +43,17 @@ export let makeUsername = (name) => {
     wordWrapWidth: 440
 });
 
-  let basicText = new Text(`Username: ${name}`, style);
-      basicText.x = 30;
-      basicText.y = 90;
+  let userName = new Text(`Username: ${name}`, style);
+      userName.x = 30;
+      userName.y = 90;
+
+  let player = new Text(`Player ID: ${id}`, style);
+  player.x = 30;
+  player.y = 30;
       
-  app.stage.addChild(basicText);
+  app.stage.addChild(userName);
+  app.stage.addChild(player);
+
 }
 //Use Pixi's built-in `loader` module to load an image
 loader

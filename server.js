@@ -6,6 +6,12 @@ let users = [];
 io.on('connection', (socket) => {
   console.log('Client id: ',socket.id)
   io.emit('clientid', socket.id)
+  socket.on('ferret', function (name, fn) {
+    fn('woot');
+
+  socket.on('disconnect', () => io.emit('user disconnected'))
+  });
+
 })
 
 io.on('username', username => {
@@ -13,9 +19,6 @@ io.on('username', username => {
     users.push({userid:socket.id, username:username})
     console.log('users:', users)
 })
-io.on('disconnect', function () {
-  io.emit('User Disconnected');
-});
 
 io.listen(port);
 console.log('Listening on port ', port);

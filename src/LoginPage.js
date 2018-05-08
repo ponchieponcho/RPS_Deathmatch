@@ -17,8 +17,8 @@ componentDidMount() {
 emitUsername() {
   if (this.state.inputUsername) {
     this.setState({userName: this.state.inputUsername})
-    // this.props.socket.emit('username', this.state.inputUsername)
-    makeUsername(`${this.state.inputUsername}`)
+    // this.props.socket.on('username', data => this.state.inputUsername)
+    makeUsername(`${this.state.inputUsername}`,`${this.state.inputUsername}`)
   } else {
     console.log('Cannot submit a blank username')
   }

@@ -4,21 +4,24 @@ import LoginPage from './LoginPage';
 import StartPage from './StartPage';
 
 class App extends Component {
-
+ 
   componentDidMount() {
     this.props.socket.on('connect', () => {
       this.props.socket.on('clientid', data => {
         this.setState({userId:data})
-        //local storage?
       })
     })
     }
 
  render() {
+  let smartlogin = () => {
+    return <LoginPage socket={this.props.socket}/>
+  }
+
   return (
     <Router>
       <Switch>
-      <Route path="/login" exact component={LoginPage} />
+      <Route path="/login" exact component={smartlogin}/>
       <Route path="/main" exact component={StartPage} />
       </Switch>
     </Router>
