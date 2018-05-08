@@ -6,13 +6,13 @@ let users = [];
 io.on('connection', (socket) => {
   console.log('Client id: ',socket.id)
   io.emit('clientid', socket.id)
-  socket.on('username', username => {
-    console.log('emitted username: ',username);
-    users.push({userid:socket.id, username:username})
-    console.log('users:', users)
-  })
 })
 
+io.on('username', username => {
+  console.log('emitted username: ',username);
+    users.push({userid:socket.id, username:username})
+    console.log('users:', users)
+})
 io.on('disconnect', function () {
   io.emit('User Disconnected');
 });

@@ -1,7 +1,4 @@
 import React, { Component } from 'react';
-import openSocket from 'socket.io-client';
-
-const socket = openSocket('http://localhost:8000');
 
 class LoginPage extends Component {
   constructor(props) {
@@ -14,17 +11,12 @@ class LoginPage extends Component {
   }
 
 componentDidMount() {
-  socket.on('connect', () => {
-    socket.on('clientid', data => {
-      this.setState({userId:data})
-    })
-  })
   }
 
 emitUsername() {
   if (this.state.inputUsername) {
     this.setState({userName: this.state.inputUsername})
-    socket.emit('username', this.state.inputUsername)
+    this.props.socket.emit('username', this.state.inputUsername)
   } else {
     console.log('Cannot submit a blank username')
   }
@@ -32,7 +24,7 @@ emitUsername() {
 
  render() {
   return (
-    <div className="App">
+    <div className="loginpage-container hide-on-mobile">
     <p>Pick a username: <input type="text" onChange={ event => this.setState({ inputUsername: event.target.value })} /></p>
     <button onClick={() => this.emitUsername()}>Set username</button>
     </div>    

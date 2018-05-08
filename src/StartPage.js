@@ -1,18 +1,7 @@
 import React, { Component } from 'react';
-import openSocket from 'socket.io-client';
-
-const socket = openSocket('http://localhost:8000');
 
 class StartPage extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      users: [{
-        userID:'',
-        userName:''
-      }],
-    }
-  }
+
 
 componentDidMount() {
   
@@ -23,6 +12,7 @@ componentDidMount() {
 
   return (
     <div>
+      <p>... has joined the room</p>
     <p>You reached the Start Page</p>
     <p>List of users:</p>
     {

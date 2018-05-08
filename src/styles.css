@@ -1,0 +1,20 @@
+body {
+  margin: 0;
+  padding: 0;
+  font-family: sans-serif;
+}
+
+.hide-on-mobile {
+  display: initial;
+}
+
+@media only screen and (max-width: 600px) {
+  body {
+      background-color: lightblue;
+  }
+
+.hide-on-mobile {
+display: none;
+}
+
+}

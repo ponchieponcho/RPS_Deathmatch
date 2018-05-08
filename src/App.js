@@ -5,11 +5,20 @@ import StartPage from './StartPage';
 
 class App extends Component {
 
+  componentDidMount() {
+    this.props.socket.on('connect', () => {
+      this.props.socket.on('clientid', data => {
+        this.setState({userId:data})
+        //local storage?
+      })
+    })
+    }
+
  render() {
   return (
     <Router>
       <Switch>
-      <Route path="/" exact component={LoginPage}/>
+      <Route path="/login" exact component={LoginPage} />
       <Route path="/main" exact component={StartPage} />
       </Switch>
     </Router>
