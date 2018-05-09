@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import {HashRouter as Router, Route, Switch} from 'react-router-dom';
 import ReadyPage from './ReadyPage';
 import LoginPage from './LoginPage';
+import Game from './Game';
 
 class App extends Component {
  
@@ -26,12 +27,15 @@ SmartReadyPage = () => {
  render() {
 
   return (
+    <div>
+    <Game socket={this.props.socket}/>
     <Router>
       <Switch>
       <Route path="/login" exact component={this.SmartLoginPage}/>
       <Route path="/readyup" exact component={this.SmartReadyPage} />
       </Switch>
     </Router>
+    </div>
   );
 }
 }
