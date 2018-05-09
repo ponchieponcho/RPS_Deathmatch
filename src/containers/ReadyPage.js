@@ -1,29 +1,35 @@
 import React, { Component } from 'react';
 import { withRouter } from "react-router-dom";
-import TotalUsers from '../components/TotalUsers';
+// import TotalUsers from '../components/TotalUsers';
 import WelcomeUser from '../components/WelcomeUser';
-import ReadyButton from '../components/ReadyButton';
+import ReadyToggle from '../components/ReadyToggle';
+import ReadyMsg from '../components/ReadyMsg';
 
 class ReadyPage extends Component {
 constructor(props) {
   super(props);
   this.state = {
-    users: []
+    ready: false
   }
 }
 
-componentDidMount() {
-  this.props.socket.on('current-users', allUsers => {
-    this.setState({users: allUsers})
-  })
+togglePlayerReady = () => {
+  if (this.state.ready === false) {
+    this.setState({ready: true})
+    console.log('true')
+  } else {
+    this.setState({ready: false})
+    console.log('false')
+
+  }
 }
 
  render() {
   return (
     <div>
     <WelcomeUser />
-    <TotalUsers users={this.state.users}/>
-    <ReadyButton />
+    <ReadyMsg ready={this.state.ready}/>
+    <ReadyToggle togglePlayerReady={this.togglePlayerReady} />
   </div>
   );
 }

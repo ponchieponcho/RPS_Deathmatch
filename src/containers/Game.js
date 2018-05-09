@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import TotalUsers from '../components/TotalUsers';
 
 class Game extends Component {
   constructor(props) {
@@ -8,9 +9,15 @@ class Game extends Component {
     }
   }
 
+  componentDidMount() {
+    this.props.socket.on('current-users', allUsers => {
+      this.setState({users: allUsers})
+    })
+  }
+
  render() {
   return (
-  <p>test</p> 
+    <TotalUsers users={this.state.users}/>
   );
 }
 }
