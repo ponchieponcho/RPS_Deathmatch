@@ -12,9 +12,6 @@ class LoginPage extends Component {
     }
   }
 
-componentDidMount() {
-  }
-
 emitUsername = () => {
   if (this.state.userName) {
     localStorage.setItem('username', this.state.userName);
@@ -23,8 +20,7 @@ emitUsername = () => {
       id: localStorage.getItem('id'),
       selection: null
     }
-    this.props.socket.emit('userinfo', user)
-    console.log(this.props)
+    this.props.socket.emit('join-game', user)
     this.props.history.push("/readyup");
   } else {
     console.log('Cannot submit a blank username')

@@ -6,18 +6,19 @@ let users = [];
 
 io.on('connection', (socket) => {
   console.log('Socket id: ',socket.id)
-
+  io.emit('current-users', users)
   io.emit('clientid', socket.id)
   
-  socket.on('userinfo', (user) => {
+  socket.on('join-game', (user) => {
     users.push(user)
-    console.log(users)
+    io.emit('current-users', users)
   })
 
   socket.on('disconnect', () => {
     io.emit('user disconnected')
   })
 
+  socket.on('test', () => console.log('Test worked!'))
 })
 
 

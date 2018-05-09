@@ -5,15 +5,24 @@ import WelcomeUser from '../components/WelcomeUser';
 import ReadyButton from '../components/ReadyButton';
 
 class ReadyPage extends Component {
+constructor(props) {
+  super(props);
+  this.state = {
+    users: []
+  }
+}
 
 componentDidMount() {
-  }
+  this.props.socket.on('current-users', allUsers => {
+    this.setState({users: allUsers})
+  })
+}
 
  render() {
   return (
     <div>
     <WelcomeUser />
-    <TotalUsers />
+    <TotalUsers users={this.state.users}/>
     <ReadyButton />
   </div>
   );

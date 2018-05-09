@@ -16,15 +16,20 @@ class App extends Component {
     }
 
 SmartLoginPage = () => {
-return (<LoginPage socket={this.props.socket}/>)
+  return (<LoginPage socket={this.props.socket}/>)
 }
+
+SmartReadyPage = () => {
+  return (<ReadyPage socket={this.props.socket}/>)
+}
+
  render() {
 
   return (
     <Router>
       <Switch>
       <Route path="/login" exact component={this.SmartLoginPage}/>
-      <Route path="/readyup" exact component={ReadyPage} />
+      <Route path="/readyup" exact component={this.SmartReadyPage} />
       </Switch>
     </Router>
   );
