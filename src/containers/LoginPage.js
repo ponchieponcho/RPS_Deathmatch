@@ -7,18 +7,19 @@ class LoginPage extends Component {
     super(props);
     this.state = {
       userName: '',
-      inputUsername: '',
-      userId: ''
+      ready: false
     }
   }
 
 emitUsername = () => {
   if (this.state.userName) {
     localStorage.setItem('username', this.state.userName);
+    localStorage.setItem('ready', this.state.ready);
     let user = {
       username: localStorage.getItem('username'),
       id: localStorage.getItem('id'),
-      selection: null
+      selection: null,
+      ready: localStorage.getItem('ready')
     }
     this.props.socket.emit('join-game', user)
     this.props.history.push("/readyup");

@@ -5,7 +5,8 @@ class Game extends Component {
   constructor(props) {
     super(props);
     this.state = {
-     users:[]
+     users:[],
+     ready: localStorage.getItem('ready')
     }
   }
 
@@ -17,7 +18,7 @@ class Game extends Component {
 
  render() {
   return (
-    <TotalUsers users={this.state.users}/>
+    <TotalUsers users={this.state.users} ready={this.state.ready}/>
   );
 }
 }

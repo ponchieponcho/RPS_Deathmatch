@@ -16,11 +16,10 @@ constructor(props) {
 togglePlayerReady = () => {
   if (this.state.ready === false) {
     this.setState({ready: true})
-    console.log('true')
+    localStorage.setItem('ready', true)
   } else {
     this.setState({ready: false})
-    console.log('false')
-
+    localStorage.setItem('ready', false)
   }
 }
 
@@ -29,7 +28,7 @@ togglePlayerReady = () => {
     <div>
     <WelcomeUser />
     <ReadyMsg ready={this.state.ready}/>
-    <ReadyToggle togglePlayerReady={this.togglePlayerReady} />
+    <ReadyToggle togglePlayerReady={this.togglePlayerReady} ready={this.state.ready} />
   </div>
   );
 }
