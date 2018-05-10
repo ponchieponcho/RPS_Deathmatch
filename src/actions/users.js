@@ -5,7 +5,7 @@ export const UPDATE_READY = 'UPDATE_READY';
 export const UPDATE_ID = 'UPDATE_ID';
 
 export const actionUpdateUsername = name => {
-    console.log('actionUpdateUsername', name)
+    // console.log('actionUpdateUsername', name)
     return {
         type: UPDATE_USERNAME,
         payload: name
@@ -13,7 +13,7 @@ export const actionUpdateUsername = name => {
   }
 
 export const actionUpdateUsers = users => {
-    console.log('actionUpdateUsers', users)
+    // console.log('actionUpdateUsers', users)
     return {
         type: UPDATE_USERS,
         payload: users
@@ -21,7 +21,7 @@ export const actionUpdateUsers = users => {
 }
 
 export const actionUpdateReady = ready => {
-    console.log('actionUpdateReady', ready)
+    // console.log('actionUpdateReady', ready)
     return {
         type: UPDATE_READY,
         payload: ready
@@ -29,7 +29,7 @@ export const actionUpdateReady = ready => {
 }
 
 export const actionUpdateId = id => {
-    console.log('actionUpdateId', id)
+    // console.log('actionUpdateId', id)
     return {
         type: UPDATE_ID,
         payload: id

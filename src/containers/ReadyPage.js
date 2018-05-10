@@ -12,10 +12,8 @@ class ReadyPage extends Component {
 
 togglePlayerReady = () => {
   if (this.props.ready === false) {
-    localStorage.setItem('ready', true)
     this.props.dispatch(actionUpdateReady(true))
   } else {
-    localStorage.setItem('ready', false)
     this.props.dispatch(actionUpdateReady(false))
   }
 }
@@ -23,7 +21,7 @@ togglePlayerReady = () => {
  render() {
   return (
     <div>
-    <WelcomeUser />
+    <WelcomeUser name={this.props.username}/>
     <ReadyMsg ready={this.props.ready}/>
     <ReadyToggle togglePlayerReady={this.togglePlayerReady} />
   </div>
@@ -33,7 +31,8 @@ togglePlayerReady = () => {
 
 let mapStateToProps = (state) => { 
   return {
-    ready: state.ready
+    ready: state.ready,
+    username: state.username
   };
 }
 

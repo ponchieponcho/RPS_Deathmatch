@@ -1,8 +1,6 @@
 import React from 'react';
 
-let WelcomeUser = (props) => {
-    let name = localStorage.getItem('username');
-
+let WelcomeUser = ({name}) => {
     return (
         <p>Welcome, {name}!</p>
     )
