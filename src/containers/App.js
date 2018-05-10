@@ -1,38 +1,32 @@
 import React, { Component } from 'react';
 import {HashRouter as Router, Route, Switch} from 'react-router-dom';
+import {connect} from 'react-redux';
+
 import ReadyPage from './ReadyPage';
 import LoginPage from './LoginPage';
 import Game from './Game';
 
+import {actionUpdateId} from '../actions/users';
+
 class App extends Component {
  
-  componentDidMount() {
-    this.props.socket.on('connect', () => {
-      this.props.socket.on('clientid', id => {
-        this.setState({userId:id})
-        console.log('Socket id: ',id)
-        localStorage.setItem('id',id)
-      })
+componentDidMount() {
+  this.props.socket.on('connect', () => {
+    this.props.socket.on('clientid', id => {
+      console.log('Socket id: ',id)
+      this.props.dispatch(actionUpdateId(id))
     })
-    }
-
-SmartLoginPage = () => {
-  return (<LoginPage socket={this.props.socket}/>)
-}
-
-SmartReadyPage = () => {
-  return (<ReadyPage socket={this.props.socket}/>)
-}
+  })
+  }
 
  render() {
-
   return (
     <div>
-    <Game socket={this.props.socket}/>
+    <Game />
     <Router>
       <Switch>
-      <Route path="/login" exact component={this.SmartLoginPage}/>
-      <Route path="/readyup" exact component={this.SmartReadyPage} />
+      <Route path="/login" exact component={LoginPage}/>
+      <Route path="/readyup" exact component={ReadyPage} />
       </Switch>
     </Router>
     </div>
@@ -40,4 +34,14 @@ SmartReadyPage = () => {
 }
 }
 
-export default App;
+let mapStateToProps = (state) => { 
+  return {
+    socket: state.socket
+  };
+}
+
+let mapDispatchToProps = (dispatch) => {
+  return {dispatch:dispatch}
+}
+
+export default connect(mapStateToProps,mapDispatchToProps)(App);

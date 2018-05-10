@@ -7,13 +7,25 @@ let users = [];
 io.on('connection', (socket) => {
   console.log('Socket id: ',socket.id)
   io.emit('current-users', users)
-  io.emit('clientid', socket.id)
+  socket.emit('clientid', socket.id)
   
   socket.on('join-game', (user) => {
     users.push(user)
     io.emit('current-users', users)
   })
 
+  socket.on('user-ready', (id, status) => {
+    console.log(id)
+    // console.log(status)
+    let theuser = users.find((user) => user.id === id)
+    theuser.ready = status;
+    io.emit('current-users', users)
+  })
+  // if (user.id === id) {
+      //   user.ready = status
+      //   console.log(users)
+      // }
+    
   socket.on('disconnect', () => {
     io.emit('user disconnected')
   })

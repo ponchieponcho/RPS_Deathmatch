@@ -1,25 +1,19 @@
 import React, { Component } from 'react';
 import { withRouter } from "react-router-dom";
+import {connect} from 'react-redux';
+
+import {actionUpdateUsername} from '../actions/users'
 import Login from '../components/Login';
 
 class LoginPage extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      userName: '',
-      ready: false
-    }
-  }
 
 emitUsername = () => {
-  if (this.state.userName) {
-    localStorage.setItem('username', this.state.userName);
-    localStorage.setItem('ready', this.state.ready);
+  if (this.props.username) {
     let user = {
-      username: localStorage.getItem('username'),
-      id: localStorage.getItem('id'),
+      username: this.props.username,
+      id: this.props.id,
       selection: null,
-      ready: localStorage.getItem('ready')
+      ready: this.props.ready
     }
     this.props.socket.emit('join-game', user)
     this.props.history.push("/readyup");
@@ -28,18 +22,30 @@ emitUsername = () => {
   }
 }
 
-handleUsernameInput = (input) => {
-  this.setState({userName: input})
-}
-
  render() {
   return (
   <Login 
-   handleUsernameInput = {this.handleUsernameInput} 
+   handleUsernameInput = {this.props.handleUsernameInput} 
    emitUsername = {this.emitUsername} 
   /> 
-  );
-}
+  )
+  }
 }
 
-export default withRouter(LoginPage);
+let mapStateToProps = (state) => { 
+  return {
+    socket: state.socket,
+    username: state.username,
+    ready: state.ready,
+    id: state.id
+  };
+}
+
+let mapDispatchToProps = (dispatch) => {
+  return {handleUsernameInput: (input) => {
+        dispatch(actionUpdateUsername(input))
+  } }
+}
+
+
+export default connect(mapStateToProps, mapDispatchToProps)(withRouter(LoginPage));

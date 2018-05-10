@@ -1,26 +1,33 @@
 import React, { Component } from 'react';
+import {connect} from 'react-redux';
+import {actionUpdateUsers} from '../actions/users';
+
 import TotalUsers from '../components/TotalUsers';
 
 class Game extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-     users:[],
-     ready: localStorage.getItem('ready')
-    }
-  }
 
   componentDidMount() {
     this.props.socket.on('current-users', allUsers => {
-      this.setState({users: allUsers})
+      this.props.dispatch(actionUpdateUsers(allUsers))
     })
   }
 
  render() {
   return (
-    <TotalUsers users={this.state.users} ready={this.state.ready}/>
+    <TotalUsers />
   );
-}
+  }
+
 }
 
-export default Game;
+let mapStateToProps = (state) => { 
+  return {
+    socket: state.socket,
+  };
+}
+
+let mapDispatchToProps = (dispatch) => {
+  return {dispatch:dispatch}
+}
+
+export default connect(mapStateToProps,mapDispatchToProps)(Game);

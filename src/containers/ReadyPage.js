@@ -1,25 +1,22 @@
 import React, { Component } from 'react';
 import { withRouter } from "react-router-dom";
-// import TotalUsers from '../components/TotalUsers';
+import {connect} from 'react-redux';
+
 import WelcomeUser from '../components/WelcomeUser';
 import ReadyToggle from '../components/ReadyToggle';
 import ReadyMsg from '../components/ReadyMsg';
 
+import {actionUpdateReady} from '../actions/users';
+
 class ReadyPage extends Component {
-constructor(props) {
-  super(props);
-  this.state = {
-    ready: false
-  }
-}
 
 togglePlayerReady = () => {
-  if (this.state.ready === false) {
-    this.setState({ready: true})
+  if (this.props.ready === false) {
     localStorage.setItem('ready', true)
+    this.props.dispatch(actionUpdateReady(true))
   } else {
-    this.setState({ready: false})
     localStorage.setItem('ready', false)
+    this.props.dispatch(actionUpdateReady(false))
   }
 }
 
@@ -27,11 +24,23 @@ togglePlayerReady = () => {
   return (
     <div>
     <WelcomeUser />
-    <ReadyMsg ready={this.state.ready}/>
-    <ReadyToggle togglePlayerReady={this.togglePlayerReady} ready={this.state.ready} />
+    <ReadyMsg ready={this.props.ready}/>
+    <ReadyToggle togglePlayerReady={this.togglePlayerReady} />
   </div>
   );
 }
 }
 
-export default withRouter(ReadyPage);
+let mapStateToProps = (state) => { 
+  return {
+    ready: state.ready
+  };
+}
+
+let mapDispatchToProps = (dispatch) => {
+  return {dispatch:dispatch} 
+}
+
+
+export default connect(mapStateToProps,mapDispatchToProps)(withRouter(ReadyPage));
+

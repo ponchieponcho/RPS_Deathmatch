@@ -1,0 +1,4 @@
+export const UPDATE_USERNAME   = 'UPDATE_USERNAME';
+export const UPDATE_USERS = 'UPDATE_USERS';
+export const UPDATE_READY = 'UPDATE_READY';
+
