@@ -1,5 +1,4 @@
 import React from 'react';
-// import {connect} from 'react-redux';
 
 let ReadyCheckmark = ({ready}) => {
     if(ready === false) {
@@ -12,11 +11,5 @@ let ReadyCheckmark = ({ready}) => {
         )
     }
 }
-
-// let mapStateToProps = (state) => {
-//     return {
-//         ready: state.ready
-//     }
-// }
 
 export default ReadyCheckmark;

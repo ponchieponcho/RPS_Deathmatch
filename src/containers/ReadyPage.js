@@ -13,7 +13,7 @@ class ReadyPage extends Component {
 togglePlayerReady = () => {
   if (this.props.ready === false) {
     this.props.dispatch(actionUpdateReady(true))
-  } else {
+  } else if (this.props.ready === true){
     this.props.dispatch(actionUpdateReady(false))
   }
 }

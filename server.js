@@ -2,6 +2,7 @@ const io = require('socket.io')();
 const port = 8000;
 
 let users = [];
+let i = 0;
 // randomize a room name?
 
 io.on('connection', (socket) => {
@@ -15,16 +16,26 @@ io.on('connection', (socket) => {
   })
 
   socket.on('user-ready', (id, status) => {
-    console.log(id)
-    // console.log(status)
     let theuser = users.find((user) => user.id === id)
     theuser.ready = status;
+    if(status === true) {
+      i++
+    } else {
+      i--
+    }
+    console.log(i)
     io.emit('current-users', users)
-  })
-  // if (user.id === id) {
-      //   user.ready = status
-      //   console.log(users)
-      // }
+    for (let user of users) {
+      if(user.ready === true) {
+        if(i === users.length){
+          console.log('all users ready')
+        } else {
+          console.log('user are not ready')
+        }
+      }
+    }
+    })
+
     
   socket.on('disconnect', () => {
     io.emit('user disconnected')
