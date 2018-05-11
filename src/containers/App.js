@@ -4,7 +4,9 @@ import {connect} from 'react-redux';
 
 import ReadyPage from './ReadyPage';
 import LoginPage from './LoginPage';
+import ChoosePage from './ChoosePage';
 import Game from './Game';
+
 
 import {actionUpdateId} from '../actions/users';
 
@@ -27,6 +29,7 @@ componentDidMount() {
       <Switch>
       <Route path="/login" exact component={LoginPage}/>
       <Route path="/readyup" exact component={ReadyPage} />
+      <Route path="/choose" exact component={ChoosePage} />
       </Switch>
     </Router>
     </div>

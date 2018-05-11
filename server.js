@@ -1,15 +1,18 @@
 const io = require('socket.io')();
+const Game = require('./Game')
 const port = 8000;
 
 let users = [];
 let i = 0;
 // randomize a room name?
 
+let game = new Game();
+
+let interval;
 
 let countDown = (socket, status) => {
     console.log('status', status)
   let num = 10;
-  let interval;
   if (status === true) {
     interval = setInterval( () => {
       if (num >= 0) {
@@ -57,8 +60,9 @@ io.on('connection', (socket) => {
   socket.emit('clientid', socket.id)
   
   socket.on('join-game', (user) => {
-    users.push(user)
-    io.emit('current-users', users)
+    // users.push(user)
+    game.addUser(user)
+    io.emit('current-users', game.users)
   })
 
   socket.on('user-ready', (id, status) => {
