@@ -1,8 +1,8 @@
 class Game {
     constructor() {
     this.users = [],
-    this.countdown = null,
-    this.numOfUsers = 0
+    this.interval = null,
+    this.numOfReadyUsers = 0
     }
 
     addUser(user) {
@@ -24,25 +24,41 @@ class Game {
         theuser.ready = status;
         this.users = newUsers;
         if(status === true) {
-            this.numOfUsers++
+            this.numOfReadyUsers = this.numOfReadyUsers + 1;
+            console.log('ready users:', this.numOfReadyUsers)
           } else {
-            this.numOfUsers--
+            this.numOfReadyUsers = this.numOfReadyUsers - 1;
+            console.log('ready users:', this.numOfReadyUsers)
           }
-          console.log('number of users:', this.numOfUsers)
     }
 
-    startCountdown() {
-        for (let user of this.users) {
-            if(this.numOfUsers === this.users.length){
+    startCountdown(start) {
+            if(this.numOfReadyUsers === this.users.length){
               console.log('all users ready')
-            //   countDown(socket, true)
+              this.countDown(start, true)
             }
             else {
               console.log('users are not ready')
-            //   countDown(socket, false)
+              this.countDown(start, false)
             }
-          }
     }
+
+    countDown(start, status) {
+        console.log('status', status)
+        let num = 10;
+        if (status === true) {
+          this.interval = setInterval( () => {
+            if (num >= 0) {
+                start(num);
+                num--;
+              } 
+            }, 1000)
+        } else if (status === false) { 
+          start('');
+          clearInterval(this.interval)
+
+          }
+      }
 }
 
 module.exports = Game

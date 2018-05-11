@@ -18,6 +18,7 @@ componentDidMount() {
       console.log('Socket id: ',id)
       this.props.dispatch(actionUpdateId(id))
     })
+ 
   })
   }
 

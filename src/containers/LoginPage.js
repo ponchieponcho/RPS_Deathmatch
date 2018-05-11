@@ -7,6 +7,12 @@ import Login from '../components/Login';
 
 class LoginPage extends Component {
 
+componentDidMount() {
+  this.props.socket.on('push-to-choice', () => 
+    this.props.history.push("/choose")
+  )
+}
+
 emitUsername = () => {
   if (this.props.username) {
     let user = {
