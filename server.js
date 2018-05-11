@@ -15,21 +15,30 @@ io.on('connection', (socket) => {
     io.emit('current-users', game.users)
   })
 
-  socket.on('user-ready', (id, status) => {
-    game.changeReadyStatus(id, status)
-    io.emit('current-users', game.users)
-    let start = (num) => {
-      if ( num > 0) {
-        io.emit('countdown-numbers', num)
-        } 
-        else if (num === 0) {
-          console.log('push')
-          io.emit('push-to-choice')
-        }
-       }
-    game.startCountdown(start)
+  // socket.on('user-ready', (id, status) => {
+  //   game.changeReadyStatus(id, status)
+  //   io.emit('current-users', game.users)
+  //   let start = (num) => {
+  //     if ( num > 0) {
+  //       io.emit('countdown-numbers', num)
+  //       } 
+  //       else if (num === 0) {
+  //         console.log('push')
+  //         io.emit('push-to-choice')
+  //       }
+  //      }
+  //   game.startCountdown(start)
     
-    })
+  //   })
+
+    socket.on('user-ready', (id, status) => {
+      game.changeReadyStatus(id, status)
+      io.emit('current-users', game.users)
+      if (game.numOfReadyUsers === game.users.length) {
+        io.emit('readybutton')
+      }
+      
+      })
 
   socket.on('disconnect', () => {
     game.removeUser(socket.id)
