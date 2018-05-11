@@ -3,6 +3,7 @@ export const UPDATE_USERNAME = 'UPDATE_USERNAME';
 export const UPDATE_USERS = 'UPDATE_USERS';
 export const UPDATE_READY = 'UPDATE_READY';
 export const UPDATE_ID = 'UPDATE_ID';
+export const UPDATE_COUNTDOWN = 'UPDATE_COUNTDOWN';
 
 export const actionUpdateUsername = name => {
     // console.log('actionUpdateUsername', name)
@@ -33,6 +34,14 @@ export const actionUpdateId = id => {
     return {
         type: UPDATE_ID,
         payload: id
+    }
+}
+
+export const actionUpdateCountdown = number => {
+    console.log('actionUpdateCountdown', number)
+    return {
+        type: UPDATE_COUNTDOWN,
+        payload: number
     }
 }
 

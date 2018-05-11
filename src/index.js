@@ -9,7 +9,8 @@ import openSocket from 'socket.io-client';
 import { UPDATE_USERNAME,
         UPDATE_USERS,
         UPDATE_READY,
-        UPDATE_ID } from './actions/users'
+        UPDATE_ID,
+        UPDATE_COUNTDOWN } from './actions/users'
 
 const socket = openSocket('http://localhost:8000');
 
@@ -19,11 +20,13 @@ let initialState = {
     username: '',
     socket: socket,
     selection: null,
-    id:''
+    id:'',
+    countdown: ''
 };
 
 let reducer = (oldState = initialState, action) => {
     switch (action.type) {
+
         case UPDATE_USERNAME:
         // console.log('TRIGGERED ACTION: UPDATE_USERNAME')
         let username = action.payload;
@@ -44,6 +47,11 @@ let reducer = (oldState = initialState, action) => {
         // console.log('TRIGGERED ACTION: UPDATE_USERS')
         let id = action.payload;
         return {...oldState, id: id}
+
+        case UPDATE_COUNTDOWN:
+        console.log('TRIGGERED ACTION: UPDATE_COUNTDOWN')
+        let countdown = action.payload;
+        return {...oldState, countdown: countdown}
 
         default:
         return oldState;

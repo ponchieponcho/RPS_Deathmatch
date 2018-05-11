@@ -5,6 +5,52 @@ let users = [];
 let i = 0;
 // randomize a room name?
 
+
+let countDown = (socket, status) => {
+    console.log('status', status)
+  let num = 10;
+  let interval;
+  if (status === true) {
+    interval = setInterval( () => {
+      if (num >= 0) {
+      io.emit('countdown-numbers', num)
+      num--;
+        } 
+      }, 1000)
+  } else if (status === false) { 
+    clearInterval(interval)
+    interval = null;
+    io.emit('countdown-numbers', 'false')
+    }
+}
+  
+//  if (status === true) {
+//   interval(num);
+//  } else if (status === false) {
+//     clearInterval(interval())
+//     io.emit('countdown-numbers', 'false')
+//  }
+
+
+// let countDown = (socket, status) => {
+//   console.log('status', status)
+//  if (status === true) {
+//     io.emit('countdown-numbers', 10)
+//  } else if (status === false) {
+//     io.emit('countdown-numbers', '')
+//  }
+// }
+
+// let countDown = (socket, status) => { 
+//   console.log('status', status)
+//  if (status === true) {
+//   io.emit('countdown-numbers', 'true')
+//  } else if (status === false) {
+//   io.emit('countdown-numbers', 'false')
+
+//  }
+// }
+
 io.on('connection', (socket) => {
   console.log('Socket id: ',socket.id)
   io.emit('current-users', users)
@@ -23,22 +69,26 @@ io.on('connection', (socket) => {
     } else {
       i--
     }
-    console.log(i)
+    console.log('number of users:', i)
     io.emit('current-users', users)
+
     for (let user of users) {
-      if(user.ready === true) {
         if(i === users.length){
           console.log('all users ready')
-        } else {
-          console.log('user are not ready')
+          countDown(socket, true)
+        }
+        else {
+          console.log('users are not ready')
+          countDown(socket, false)
         }
       }
-    }
     })
 
-    
   socket.on('disconnect', () => {
-    io.emit('user disconnected')
+    console.log(`Disconnected ${socket.id}`)
+    let removeduser = users.filter( user => user.id !== socket.id)
+    users = removeduser;
+    io.emit('current-users', users)
   })
 
   socket.on('test', () => console.log('Test worked!'))
