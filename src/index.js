@@ -21,7 +21,8 @@ let initialState = {
     socket: socket,
     selection: null,
     id:'',
-    countdown: ''
+    countdown: '',
+    choice_countdown: ''
 };
 
 let reducer = (oldState = initialState, action) => {
