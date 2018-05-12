@@ -10,7 +10,8 @@ import { UPDATE_USERNAME,
         UPDATE_USERS,
         UPDATE_READY,
         UPDATE_ID,
-        UPDATE_COUNTDOWN } from './actions/users'
+        UPDATE_COUNTDOWN,
+        UPDATE_SELECTION } from './actions/users'
 
 const socket = openSocket('http://localhost:8000');
 
@@ -50,9 +51,15 @@ let reducer = (oldState = initialState, action) => {
         return {...oldState, id: id}
 
         case UPDATE_COUNTDOWN:
-        console.log('TRIGGERED ACTION: UPDATE_COUNTDOWN')
+        // console.log('TRIGGERED ACTION: UPDATE_COUNTDOWN')
         let countdown = action.payload;
         return {...oldState, countdown: countdown}
+
+        case UPDATE_SELECTION:
+        console.log('TRIGGERED ACTION: UPDATE_SELECTION')
+        let selection = action.payload;
+        socket.emit('user-selection', oldState.id, selection)
+        return {...oldState, selection: selection}
 
         default:
         return oldState;

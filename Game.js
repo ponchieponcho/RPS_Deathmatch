@@ -32,6 +32,13 @@ class Game {
           }
     }
 
+    changeSelection(id, selection) {
+        let newUsers = this.users.slice();
+        let theuser = newUsers.find((user) => user.id === id)
+        theuser.selection = selection;
+        this.users = newUsers;
+    }
+
     startCountdown(start) {
             if(this.numOfReadyUsers === this.users.length){
               console.log('all users ready')
@@ -45,7 +52,7 @@ class Game {
 
     countDown(start, status) {
         console.log('status', status)
-        let num = 10;
+        let num = 5;
         if (status === true) {
           this.interval = setInterval( () => {
             if (num >= 0) {

@@ -23,13 +23,18 @@ io.on('connection', (socket) => {
         io.emit('countdown-numbers', num)
         } 
         else if (num === 0) {
-          console.log('push')
           io.emit('push-to-choice')
         }
        }
     game.startCountdown(start)
-    
     })
+
+  socket.on('user-selection', (id, selection) => {
+    console.log('selection',selection)
+    game.changeSelection(id, selection)
+    io.emit('current-users', game.users)
+  console.log(game.users)
+})
 
   socket.on('disconnect', () => {
     game.removeUser(socket.id)

@@ -4,6 +4,8 @@ import {connect} from 'react-redux';
 
 import Options from '../components/Options';
 
+import {actionUpdateSelection} from '../actions/users';
+
 class ChoosePage extends Component {
 
 componentDidMount() {
@@ -11,23 +13,24 @@ componentDidMount() {
   //once countdown is done, send results to server
   //push user to WIN or LOSE screen
 }
-  
+
  render() {
   return (
-    <Options />
+    <Options handleSelection={this.props.handleSelection}/>
   );
 }
 }
 
 let mapStateToProps = (state) => { 
   return {
-    ready: state.ready,
-    username: state.username
+    selection: state.selection
   };
 }
 
 let mapDispatchToProps = (dispatch) => {
-  return {dispatch:dispatch} 
+  return {handleSelection: (sel) => {
+    dispatch(actionUpdateSelection(sel))
+  }} 
 }
 
 
