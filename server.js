@@ -36,6 +36,7 @@ io.on('connection', (socket) => {
   console.log(game.users)
 })
 
+
   socket.on('disconnect', () => {
     game.removeUser(socket.id)
     io.emit('current-users', game.users)
