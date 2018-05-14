@@ -6,6 +6,7 @@ export const UPDATE_ID = 'UPDATE_ID';
 export const UPDATE_COUNTDOWN = 'UPDATE_COUNTDOWN';
 export const UPDATE_SELECTION = 'UPDATE_SELECTION';
 export const UPDATE_OPPONENT = 'UPDATE_OPPONENT';
+export const RESET_STATE = 'RESET_STATE';
 
 
 
@@ -62,6 +63,26 @@ export const actionUpdateOpponent = opponent => {
     return {
         type: UPDATE_OPPONENT,
         payload: opponent
+    }
+}
+
+export const actionResetState = () => {
+    console.log('actionResetState')
+    let resetState = {
+        users: [],
+        ready: false,
+        username: '',
+        selection: null,
+        status: null,
+        id:'',
+        countdown: '',
+        choice_countdown: '',
+        opponent: ''
+    };
+    
+    return {
+        type: RESET_STATE,
+        payload: resetState
     }
 }
 

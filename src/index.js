@@ -69,6 +69,11 @@ let reducer = (oldState = initialState, action) => {
         let opponent = action.payload;
         return {...oldState, opponent: opponent}
 
+        // case RESET_STATE:
+        // console.log('TRIGGERED ACTION: RESET_STATE')
+        // let resetState = action.payload;
+        // return {oldState : initialState}
+
         default:
         return oldState;
     }

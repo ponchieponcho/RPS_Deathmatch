@@ -5,10 +5,11 @@ import {connect} from 'react-redux';
 import ReadyPage from './ReadyPage';
 import LoginPage from './LoginPage';
 import ChoosePage from './ChoosePage';
+import WaitPage from './WaitPage';
 import Game from './Game';
 
 
-import {actionUpdateId} from '../actions/users';
+import { actionUpdateId } from '../actions/users';
 
 class App extends Component {
  
@@ -31,6 +32,7 @@ componentDidMount() {
       <Route path="/login" exact component={LoginPage}/>
       <Route path="/readyup" exact component={ReadyPage} />
       <Route path="/choose" exact component={ChoosePage} />
+      <Route path="/wait" exact component={WaitPage} />
       </Switch>
     </Router>
     </div>

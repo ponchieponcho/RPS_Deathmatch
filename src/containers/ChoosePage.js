@@ -10,11 +10,6 @@ import {actionUpdateSelection} from '../actions/users';
 class ChoosePage extends Component {
 
 componentDidMount() {
-  this.props.socket.on('your-opponent', opponent => {
-    console.log(opponent)
-    this.props.handleOpponent(opponent)
-  })
-
   this.props.socket.on('choice-countdown', () => {
 
   })

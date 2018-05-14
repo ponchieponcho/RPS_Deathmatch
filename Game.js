@@ -92,19 +92,22 @@ class Game {
         // return arr
     };
 
-    vsStart(tournament, sendOpponent) {
-        for (let i =0 ; i < tournament.length;i++) {
+    vsStart(tournament, sendOpponent, sendWait, sendWin) {
+        for (let i = 0 ; i < tournament.length; i++) {
             if (tournament[i].length === 2) {
                 console.log(`${tournament[i][0].username} VS ${tournament[i][1].username}`)
                 sendOpponent(tournament[i][0].username, tournament[i][0].id, tournament[i][1].username, tournament[i][1].id)
-
-            } else if (tournament[i].length === 1 && tournament[i].status === "waiting") {
-                console.log('waiting', tournament[i][0].id)
-                io.to(tournament[i][0].id).emit('waiting');
-            } else if (tournament[i].length === 1 && tournament[i].status === "winner") {
-                console.log('winner', tournament[i][0].id)
-                io.to(tournament[i][0].id).emit('you-win');
-            }
+                } 
+            else if (tournament[i].length === 1) {
+                if(tournament[i][0].status === "waiting") {
+                    console.log('waiting', tournament[i][0].id)
+                    sendWait(tournament[i][0].id)
+                    } 
+                else if (tournament[i][0].status === "winner") {
+                    console.log('winner', tournament[i][0].id)
+                    sendWin(tournament[i][0].id)
+                    }
+            } 
         }
     }
 

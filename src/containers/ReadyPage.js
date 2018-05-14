@@ -17,6 +17,10 @@ componentDidMount() {
     console.log(opponent)
     this.props.dispatch(actionUpdateOpponent(opponent))
   })
+
+  this.props.socket.on('waiting', () => {
+    this.props.history.push("/wait")
+  })
 }
 
 togglePlayerReady = () => {
@@ -42,9 +46,8 @@ let mapStateToProps = (state) => {
   return {
     ready: state.ready,
     username: state.username,
-    socket: state.socket,
-    opponent: state.opponent
-  };
+    socket: state.socket
+    };
 }
 
 let mapDispatchToProps = (dispatch) => {

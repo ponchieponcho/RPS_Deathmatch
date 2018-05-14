@@ -23,19 +23,34 @@ io.on('connection', (socket) => {
         io.emit('countdown-numbers', num)
         } 
         else if (num === 0) {
-          let sendOpponent = (oneUsername, oneId, twoUsername, twoId) => {
 
-            console.log(`Emiting your-opponent to: ${oneId}`)
-            socket.to(`${oneId}`).emit('your-opponent', twoUsername);
+          let sendOpponent = (oneUsername, oneId, twoUsername, twoId) => {
+            
+            console.log(`******Emiting your-opponent to: ${oneId}******`)
+            io.to(`${oneId}`).emit('your-opponent', twoUsername);
+            io.to(`${oneId}`).emit('push-to-choice');
+
             // io.to(oneId).emit('choice-countdown');
 
-            console.log(`Emiting your-opponent to: ${twoId}`)
-            socket.to(`${twoId}`).emit('your-opponent', oneUsername);
+            console.log(`******Emiting your-opponent to: ${twoId}******`)
+            io.to(`${twoId}`).emit('your-opponent', oneUsername);
+            io.to(`${twoId}`).emit('push-to-choice');
+
             // io.to(twoId).emit('choice-countdown');
           }
+
+          let sendWait = (playerID) => {
+            io.to(playerID).emit('waiting');
+          }
+
+          let sendWin = (playerID) => {
+            io.to(playerID).emit('you-win');
+            io.emit('push-to-end-screen')
+          }
+
           game.handlePairUp(game.users)
-          game.vsStart(game.tournament, sendOpponent)
-          io.emit('push-to-choice')
+          game.vsStart(game.tournament, sendOpponent, sendWait, sendWin)
+          // io.emit('push-to-choice')
 
         }
        }
@@ -44,9 +59,9 @@ io.on('connection', (socket) => {
 
   socket.on('user-selection', (id, selection) => {
     console.log('selection',selection)
-    game.changeSelection(id, selection)
-    io.emit('current-users', game.users)
-  console.log(game.users)
+  //   game.changeSelection(id, selection)
+  //   io.emit('current-users', game.users)
+  // console.log(game.users)
 })
 
 
