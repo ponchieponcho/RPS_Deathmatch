@@ -1,6 +1,7 @@
 class Game {
     constructor() {
     this.users = [],
+    this.tournament = [],
     this.interval = null,
     this.numOfReadyUsers = 0
     }
@@ -25,10 +26,10 @@ class Game {
         this.users = newUsers;
         if(status === true) {
             this.numOfReadyUsers = this.numOfReadyUsers + 1;
-            console.log('ready users:', this.numOfReadyUsers)
+            // console.log('ready users:', this.numOfReadyUsers)
           } else {
             this.numOfReadyUsers = this.numOfReadyUsers - 1;
-            console.log('ready users:', this.numOfReadyUsers)
+            // console.log('ready users:', this.numOfReadyUsers)
           }
     }
 
@@ -41,17 +42,17 @@ class Game {
 
     startCountdown(start) {
             if(this.numOfReadyUsers === this.users.length){
-              console.log('all users ready')
+            //   console.log('all users ready')
               this.countDown(start, true)
             }
             else {
-              console.log('users are not ready')
+            //   console.log('users are not ready')
               this.countDown(start, false)
             }
     }
 
     countDown(start, status) {
-        console.log('status', status)
+        // console.log('status', status)
         let num = 5;
         if (status === true) {
           this.interval = setInterval( () => {
@@ -66,6 +67,89 @@ class Game {
 
           }
       }
+
+    handlePairUp(users) {
+        let newUsers = users.slice();
+        let arr = [];
+        let i = 0;
+        while ((newUsers[0]) && (newUsers[1])) {
+            arr[i] = [newUsers[0], newUsers[1]];
+            newUsers.splice(0,1);
+            newUsers.splice(0,1);
+            i++;
+        }
+        if (newUsers[0]) {
+            if (newUsers[0].status === 'winner') {
+                console.log(`${newUsers[0].username} is the winner!`);
+            } else {
+                newUsers[0].status = 'waiting';
+                arr[i] = [newUsers[0]];
+            }
+        }
+        
+        this.tournament = arr.slice();
+        console.log('this.tournament at end of handle pairup', this.tournament)
+        // return arr
+    };
+
+    vsStart(tournament, sendOpponent) {
+        for (let i =0 ; i < tournament.length;i++) {
+            if (tournament[i].length === 2) {
+                console.log(`${tournament[i][0].username} VS ${tournament[i][1].username}`)
+                sendOpponent(tournament[i][0].username, tournament[i][0].id, tournament[i][1].username, tournament[i][1].id)
+
+            } else if (tournament[i].length === 1 && tournament[i].status === "waiting") {
+                console.log('waiting', tournament[i][0].id)
+                io.to(tournament[i][0].id).emit('waiting');
+            } else if (tournament[i].length === 1 && tournament[i].status === "winner") {
+                console.log('winner', tournament[i][0].id)
+                io.to(tournament[i][0].id).emit('you-win');
+            }
+        }
+    }
+
+    rPS(playerId, opponentId) {
+        let playerOne = this.tournament.find((user) => user.id === playerId )
+        let playerTwo = this.tournament.find((user) => user.id === opponentId )
+        console.log(playerOne.username, playerOne.selection)
+        console.log(playerTwo.username, playerTwo.selection)
+    
+        if (playerOne.selection === playerTwo.selection ){
+            // Got to figure this out *****
+            return [playerOne, playerTwo];
+        }
+    
+        if (playerOne.selection === "rock" ){
+            if(playerTwo.selection === "scissors") {
+                this.tournament = tournament.filter( user => user.id !== playerTwo.id)
+                return playerOne;
+            } else{
+                tournament = tournament.filter( user => user.id !== playerOne.id)
+                return playerTwo;
+            }
+        }
+    
+        if (playerOne.selection === "paper" ){
+            if (playerTwo.selection === "rock" ){
+                this.tournament = tournament.filter( user => user.id !== playerTwo.id)
+                return playerOne;
+            } else{
+                this.tournament = tournament.filter( user => user.id !== playerOne.id)
+                return playerTwo;
+            }
+        }
+    
+        if (playerOne.selection === "scissors"){
+            if (playerTwo.selection === "rock"){
+                this.tournament = tournament.filter( user => user.id !== playerTwo.id)
+                return playerOne;
+            } else{
+                this.tournament = tournament.filter( user => user.id !== playerOne.id)
+                return playerTwo;
+            }
+        }
+    }
+    
 }
 
 module.exports = Game

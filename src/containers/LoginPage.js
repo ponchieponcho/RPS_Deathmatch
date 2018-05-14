@@ -19,7 +19,8 @@ emitUsername = () => {
       username: this.props.username,
       id: this.props.id,
       selection: null,
-      ready: this.props.ready
+      ready: this.props.ready,
+      status: null
     }
     this.props.socket.emit('join-game', user)
     this.props.history.push("/readyup");

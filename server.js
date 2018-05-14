@@ -23,7 +23,20 @@ io.on('connection', (socket) => {
         io.emit('countdown-numbers', num)
         } 
         else if (num === 0) {
+          let sendOpponent = (oneUsername, oneId, twoUsername, twoId) => {
+
+            console.log(`Emiting your-opponent to: ${oneId}`)
+            socket.to(`${oneId}`).emit('your-opponent', twoUsername);
+            // io.to(oneId).emit('choice-countdown');
+
+            console.log(`Emiting your-opponent to: ${twoId}`)
+            socket.to(`${twoId}`).emit('your-opponent', oneUsername);
+            // io.to(twoId).emit('choice-countdown');
+          }
+          game.handlePairUp(game.users)
+          game.vsStart(game.tournament, sendOpponent)
           io.emit('push-to-choice')
+
         }
        }
     game.startCountdown(start)

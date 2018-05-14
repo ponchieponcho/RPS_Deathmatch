@@ -5,6 +5,8 @@ export const UPDATE_READY = 'UPDATE_READY';
 export const UPDATE_ID = 'UPDATE_ID';
 export const UPDATE_COUNTDOWN = 'UPDATE_COUNTDOWN';
 export const UPDATE_SELECTION = 'UPDATE_SELECTION';
+export const UPDATE_OPPONENT = 'UPDATE_OPPONENT';
+
 
 
 export const actionUpdateUsername = name => {
@@ -52,6 +54,14 @@ export const actionUpdateSelection = sel => {
     return {
         type: UPDATE_SELECTION,
         payload: sel
+    }
+}
+
+export const actionUpdateOpponent = opponent => {
+    console.log('actionUpdateOpponent', opponent)
+    return {
+        type: UPDATE_OPPONENT,
+        payload: opponent
     }
 }
 

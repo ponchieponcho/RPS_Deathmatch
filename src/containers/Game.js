@@ -3,7 +3,6 @@ import {connect} from 'react-redux';
 
 import TotalUsers from '../components/TotalUsers';
 import ReadyCountdown from '../components/ReadyCountdown';
-import ChoiceCountdown from '../components/ChoiceCountdown';
 
 
 import {actionUpdateUsers,
@@ -27,7 +26,6 @@ class Game extends Component {
   return (
     <div>
     {this.props.countdown === 1 ? <div></div> : <ReadyCountdown countdown={this.props.countdown}/>}
-    <ChoiceCountdown choice_countdown={this.props.choice_countdown}/>
     <TotalUsers />
     </div>
   );
@@ -38,8 +36,7 @@ class Game extends Component {
 let mapStateToProps = (state) => { 
   return {
     socket: state.socket,
-    countdown: state.countdown,
-    choice_countdown: state.choice_countdown
+    countdown: state.countdown
   };
 }
 

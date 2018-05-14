@@ -7,15 +7,15 @@ let Options = ({handleSelection}) => {
         <span>DO THE THING!:</span>
         <input type="radio" id="rockChoice"
         name="selection" value="rock" onClick={ event => handleSelection(event.target.value)} />
-        <label for="rockChoice">Rock</label>
+        <label htmlFor="rockChoice">Rock</label>
 
         <input type="radio" id="paperChoice"
         name="selection" value="paper" onClick={ event => handleSelection(event.target.value)} />
-        <label for="paperChoice">Paper</label>
+        <label htmlFor="paperChoice">Paper</label>
 
         <input type="radio" id="scissorChoice"
         name="selection" value="scissors" onClick={ event => handleSelection(event.target.value)} />
-        <label for="scissorChoice">Scissors</label>
+        <label htmlFor="scissorChoice">Scissors</label>
     </div>
     )
 }

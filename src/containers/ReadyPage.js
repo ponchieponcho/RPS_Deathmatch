@@ -7,8 +7,17 @@ import ReadyToggle from '../components/ReadyToggle';
 import ReadyMsg from '../components/ReadyMsg';
 
 import {actionUpdateReady} from '../actions/users';
+import {actionUpdateOpponent} from '../actions/users';
+
 
 class ReadyPage extends Component {
+
+componentDidMount() {
+  this.props.socket.on('your-opponent', opponent => {
+    console.log(opponent)
+    this.props.dispatch(actionUpdateOpponent(opponent))
+  })
+}
 
 togglePlayerReady = () => {
   if (this.props.ready === false) {
@@ -32,12 +41,14 @@ togglePlayerReady = () => {
 let mapStateToProps = (state) => { 
   return {
     ready: state.ready,
-    username: state.username
+    username: state.username,
+    socket: state.socket,
+    opponent: state.opponent
   };
 }
 
 let mapDispatchToProps = (dispatch) => {
-  return {dispatch:dispatch} 
+  return {dispatch:dispatch}
 }
 
 
