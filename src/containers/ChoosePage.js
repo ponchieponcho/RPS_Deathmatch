@@ -15,12 +15,13 @@ componentDidMount() {
   })
 }
 
- render() {
+render() {
   return (
     <div>
-      You VS {this.props.opponent}
+      YOU: {this.props.username} VS OPPONENT:{this.props.opponent}
     <ChoiceCountdown choice_countdown={this.props.choice_countdown}/>
     <Options handleSelection={this.props.handleSelection}/>
+    <button onClick={ () => this.props.socket.emit('fight')}>Fight</button>
     </div>
   );
 }
@@ -31,7 +32,8 @@ let mapStateToProps = (state) => {
     selection: state.selection,
     choice_countdown: state.choice_countdown,
     opponent: state.opponent,
-    socket: state.socket
+    socket: state.socket,
+    username: state.username
     };
 }
 

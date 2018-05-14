@@ -12,7 +12,9 @@ import { UPDATE_USERNAME,
         UPDATE_ID,
         UPDATE_COUNTDOWN,
         UPDATE_SELECTION,
-        UPDATE_OPPONENT } from './actions/users'
+        UPDATE_OPPONENT,
+        UPDATE_WINNER,
+        RESET_STATE } from './actions/users'
 
 const socket = openSocket('http://localhost:8000');
 
@@ -26,7 +28,8 @@ let initialState = {
     id:'',
     countdown: '',
     choice_countdown: '',
-    opponent: ''
+    opponent: '',
+    winner: ''
 };
 
 let reducer = (oldState = initialState, action) => {
@@ -69,10 +72,26 @@ let reducer = (oldState = initialState, action) => {
         let opponent = action.payload;
         return {...oldState, opponent: opponent}
 
-        // case RESET_STATE:
-        // console.log('TRIGGERED ACTION: RESET_STATE')
-        // let resetState = action.payload;
-        // return {oldState : initialState}
+        case UPDATE_WINNER:
+        console.log('TRIGGERED ACTION: UPDATE_WINNER')
+        let winner = action.payload;
+        return {...oldState, winner: winner}
+
+        case RESET_STATE:
+        console.log('TRIGGERED ACTION: RESET_STATE')
+        let initialState = {
+            users: [],
+            ready: false,
+            username: '',
+            socket: socket,
+            selection: null,
+            status: null,
+            id: action.payload,
+            countdown: '',
+            choice_countdown: '',
+            opponent: ''
+        };
+        return initialState;
 
         default:
         return oldState;

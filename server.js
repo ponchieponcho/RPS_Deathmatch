@@ -50,27 +50,44 @@ io.on('connection', (socket) => {
 
           game.handlePairUp(game.users)
           game.vsStart(game.tournament, sendOpponent, sendWait, sendWin)
-          // io.emit('push-to-choice')
 
         }
        }
     game.startCountdown(start)
     })
 
-  socket.on('user-selection', (id, selection) => {
-    console.log('selection',selection)
-  //   game.changeSelection(id, selection)
-  //   io.emit('current-users', game.users)
-  // console.log(game.users)
+  socket.on('user-selection', (playerId, selection) => {
+    game.changeSelection(playerId, selection)
 })
 
+  socket.on('fight', () => {
+    game.fight()
+    for (let i; i < game.losers; i++) {
+      let playerID = game.losers[i].id
+      io.to(playerID).emit('you-lost');
+    }
+    if (game.winners.length === 1) {
+      io.emit('game-over', game.winners[0].username)
+    } else {
+      for (let i = 0; i < game.winners.length; i++) {
+        let playerID = game.winners[i].id
+        io.to(playerID).emit('you-won-round');
+        // start next gameplay loop
+      }
+    }
+    console.log(`WINNERS:`, game.winners)
+    console.log(`LOSERS:`, game.losers)
+  })
 
   socket.on('disconnect', () => {
     game.removeUser(socket.id)
     io.emit('current-users', game.users)
   })
 
-  socket.on('test', () => console.log('Test worked!'))
+  socket.on('master-reset', () => {
+    io.emit('reset-to-users')
+    game.masterReset();
+  })
 })
 
 io.listen(port);

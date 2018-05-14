@@ -2,8 +2,18 @@ class Game {
     constructor() {
     this.users = [],
     this.tournament = [],
+    this.winners = [],
+    this.losers = [],
     this.interval = null,
     this.numOfReadyUsers = 0
+    }
+
+    masterReset() {
+        this.users = [];
+        this.tournament = [];
+        this.winners = [];
+        this.interval = null;
+        this.numOfReadyUsers = 0;
     }
 
     addUser(user) {
@@ -38,6 +48,7 @@ class Game {
         let theuser = newUsers.find((user) => user.id === id)
         theuser.selection = selection;
         this.users = newUsers;
+        // console.log('users after selection', this.users)
     }
 
     startCountdown(start) {
@@ -88,8 +99,7 @@ class Game {
         }
         
         this.tournament = arr.slice();
-        console.log('this.tournament at end of handle pairup', this.tournament)
-        // return arr
+        console.log('******this.tournament at end of handle pairup******', this.tournament)
     };
 
     vsStart(tournament, sendOpponent, sendWait, sendWin) {
@@ -111,44 +121,55 @@ class Game {
         }
     }
 
-    rPS(playerId, opponentId) {
-        let playerOne = this.tournament.find((user) => user.id === playerId )
-        let playerTwo = this.tournament.find((user) => user.id === opponentId )
-        console.log(playerOne.username, playerOne.selection)
-        console.log(playerTwo.username, playerTwo.selection)
+    fight() {
+        for (let i = 0; i < this.tournament.length; i++) {
+          
+            if (this.tournament[i].length === 2) {
+                let playerOne = this.users.find( (user) => {
+                    return user.id === this.tournament[i][0].id;
+                })
+                let playerTwo = this.users.find( (user) => {
+                    return user.id === this.tournament[i][1].id;
+                })
+                this.rPS(playerOne, playerTwo)
+            }
+        }
+    }
+
+    rPS(playerOne, playerTwo) {
     
         if (playerOne.selection === playerTwo.selection ){
-            // Got to figure this out *****
-            return [playerOne, playerTwo];
+            this.winners.push(playerOne)
+            this.winners.push(playerTwo)
         }
     
         if (playerOne.selection === "rock" ){
             if(playerTwo.selection === "scissors") {
-                this.tournament = tournament.filter( user => user.id !== playerTwo.id)
-                return playerOne;
+                this.winners.push(playerOne)
+                this.losers.push(playerTwo)
             } else{
-                tournament = tournament.filter( user => user.id !== playerOne.id)
-                return playerTwo;
+                this.winners.push(playerTwo)
+                this.losers.push(playerOne)
             }
         }
     
         if (playerOne.selection === "paper" ){
             if (playerTwo.selection === "rock" ){
-                this.tournament = tournament.filter( user => user.id !== playerTwo.id)
-                return playerOne;
+                this.winners.push(playerOne)
+                this.losers.push(playerTwo)
             } else{
-                this.tournament = tournament.filter( user => user.id !== playerOne.id)
-                return playerTwo;
+                this.winners.push(playerTwo)
+                this.losers.push(playerOne)
             }
         }
     
         if (playerOne.selection === "scissors"){
             if (playerTwo.selection === "rock"){
-                this.tournament = tournament.filter( user => user.id !== playerTwo.id)
-                return playerOne;
+                this.winners.push(playerOne)
+                this.losers.push(playerTwo)
             } else{
-                this.tournament = tournament.filter( user => user.id !== playerOne.id)
-                return playerTwo;
+                this.winners.push(playerTwo)
+                this.losers.push(playerOne)
             }
         }
     }
