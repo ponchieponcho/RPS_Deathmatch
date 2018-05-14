@@ -16,7 +16,7 @@ import { actionUpdateId } from '../actions/users';
 class App extends Component {
  
 componentDidMount() {
-  this.props.socket.emit('master-reset')
+  // this.props.socket.emit('master-reset')
   this.props.socket.on('connect', () => {
     this.props.socket.on('clientid', id => {
       console.log('Socket id: ',id)

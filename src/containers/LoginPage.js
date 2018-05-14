@@ -19,17 +19,21 @@ componentDidMount() {
     })
 
   this.props.socket.on('you-lost', () => {
+    console.log('pushing to lost')
     this.props.history.push("/lost");
   })
 
   this.props.socket.on('you-won-round', () => {
+    console.log('pushing to won-round')
     this.props.history.push("/won_round");
   })
 
   this.props.socket.on('game-over', (winnerName) => {
     this.props.updateWinner(winnerName);
+    console.log('pushing to game_over')
     this.props.history.push("/game_over");
   })
+
 }
 
 emitUsername = () => {

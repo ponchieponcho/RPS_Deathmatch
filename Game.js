@@ -84,6 +84,8 @@ class Game {
         let arr = [];
         let i = 0;
         while ((newUsers[0]) && (newUsers[1])) {
+            newUsers[0].status = 'fight';
+            newUsers[1].status = 'fight';
             arr[i] = [newUsers[0], newUsers[1]];
             newUsers.splice(0,1);
             newUsers.splice(0,1);
@@ -112,6 +114,7 @@ class Game {
                 if(tournament[i][0].status === "waiting") {
                     console.log('waiting', tournament[i][0].id)
                     sendWait(tournament[i][0].id)
+                    this.winners.push(tournament[i][0])
                     } 
                 else if (tournament[i][0].status === "winner") {
                     console.log('winner', tournament[i][0].id)
@@ -137,7 +140,7 @@ class Game {
     }
 
     rPS(playerOne, playerTwo) {
-    
+      
         if (playerOne.selection === playerTwo.selection ){
             this.winners.push(playerOne)
             this.winners.push(playerTwo)

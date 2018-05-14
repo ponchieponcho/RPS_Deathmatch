@@ -8,6 +8,8 @@ export const UPDATE_SELECTION = 'UPDATE_SELECTION';
 export const UPDATE_OPPONENT = 'UPDATE_OPPONENT';
 export const RESET_STATE = 'RESET_STATE';
 export const UPDATE_WINNER = 'UPDATE_WINNER';
+export const UPDATE_STATUS = 'UPDATE_STATUS';
+
 
 export const actionUpdateUsername = name => {
     // console.log('actionUpdateUsername', name)
@@ -80,3 +82,12 @@ export const actionUpdateWinner = (name) => {
         payload: name
     }
 }
+
+export const actionUpdateStatus = (status) => {
+    console.log('actionUpdateStatus', status)
+    return {
+        type: UPDATE_STATUS,
+        payload: status
+    }
+}
+
