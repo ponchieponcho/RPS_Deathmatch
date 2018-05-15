@@ -6,7 +6,7 @@ let Options = ({handleSelection}) => {
     <div className="choice-container">
         <span>DO THE THING!:</span>
         <input type="radio" id="rockChoice"
-        name="selection" value="rock" onClick={ event => handleSelection(event.target.value)} />
+        name="selection" value="rock" onClick={ event => handleSelection(event.target.value)} defaultChecked/>
         <label htmlFor="rockChoice">Rock</label>
 
         <input type="radio" id="paperChoice"

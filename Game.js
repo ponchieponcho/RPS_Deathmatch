@@ -5,7 +5,28 @@ class Game {
     this.winners = [],
     this.losers = [],
     this.interval = null,
-    this.numOfReadyUsers = 0
+    this.numOfReadyUsers = 0,
+    this.act = 0
+    }
+
+    fightStopper() {
+        console.log('fightStopper()')
+        if(this.act === 0) {
+            console.log('act before false', this.act)
+            this.act++
+            console.log('act after', this.act)
+            return false
+        } else {
+            console.log('act before true', this.act)
+            return true
+        }
+    }
+
+    fightResetter() {
+        console.log('fightResetter()')
+        console.log('act before', this.act) //why undefined?
+        this.act = 0;
+        console.log('act after', this.act)
     }
 
     masterReset() {
@@ -20,11 +41,15 @@ class Game {
         let newUsers = this.users.slice();
         newUsers.push(user)
         this.users = newUsers;
-        console.log('addUser:',this.users)
+        // console.log('addUser:',this.users)
     }
 
     removeUser(id) {
         console.log(`Disconnected ${id}`)
+        let leavingUser = this.users.filter( user => user.id === id)
+        if (leavingUser.ready === true) {
+            this.numOfReadyUsers = this.numOfReadyUsers - 1;
+        }
         let removedUser = this.users.filter( user => user.id !== id)
         this.users = removedUser;
     }
@@ -101,7 +126,12 @@ class Game {
         }
         
         this.tournament = arr.slice();
-        console.log('******this.tournament at end of handle pairup******', this.tournament)
+        this.winners = [];
+        console.log('*********************')
+        console.log('****** this.tournament at end of handle pairup ******')
+        console.log(this.tournament)
+        console.log('*********************')
+
     };
 
     vsStart(tournament, sendOpponent, sendWait, sendWin) {
@@ -118,7 +148,7 @@ class Game {
                     } 
                 else if (tournament[i][0].status === "winner") {
                     console.log('winner', tournament[i][0].id)
-                    sendWin(tournament[i][0].id)
+                    // sendWin(tournament[i][0].id)
                     }
             } 
         }
@@ -140,37 +170,44 @@ class Game {
     }
 
     rPS(playerOne, playerTwo) {
-      
+
         if (playerOne.selection === playerTwo.selection ){
+            console.log('***** tie *****')
             this.winners.push(playerOne)
             this.winners.push(playerTwo)
         }
     
-        if (playerOne.selection === "rock" ){
+        else if (playerOne.selection === "rock" ){
             if(playerTwo.selection === "scissors") {
+                console.log("rock vs scissors")
                 this.winners.push(playerOne)
                 this.losers.push(playerTwo)
             } else{
+                console.log("rock vs paper")
                 this.winners.push(playerTwo)
                 this.losers.push(playerOne)
             }
         }
     
-        if (playerOne.selection === "paper" ){
+        else if (playerOne.selection === "paper" ){
             if (playerTwo.selection === "rock" ){
+                console.log('paper vs rock')
                 this.winners.push(playerOne)
                 this.losers.push(playerTwo)
             } else{
+                console.log('paper vs scissors')
                 this.winners.push(playerTwo)
                 this.losers.push(playerOne)
             }
         }
     
-        if (playerOne.selection === "scissors"){
-            if (playerTwo.selection === "rock"){
+        else if (playerOne.selection === "scissors"){
+            if (playerTwo.selection === "paper"){
+                console.log('scissors vs rock')
                 this.winners.push(playerOne)
                 this.losers.push(playerTwo)
             } else{
+                console.log('scissors vs paper')
                 this.winners.push(playerTwo)
                 this.losers.push(playerOne)
             }

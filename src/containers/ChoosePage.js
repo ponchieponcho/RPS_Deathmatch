@@ -5,13 +5,24 @@ import {connect} from 'react-redux';
 import Options from '../components/Options';
 import ChoiceCountdown from '../components/ChoiceCountdown';
 
-import {actionUpdateSelection} from '../actions/users';
+import {actionUpdateSelection, actionUpdateChoiceCountdown} from '../actions/users';
 
 class ChoosePage extends Component {
 
 componentDidMount() {
   this.props.socket.on('choice-countdown', () => {
-
+    let num = 10
+    let interval = null;
+    interval = setInterval( () => {
+      if (num >= 1) {
+        this.props.choiceCountdown(num)
+        num--;
+      } else {
+        console.log('done')
+        clearInterval(interval)
+        this.props.socket.emit('fight')
+      }
+    }, 1000)
   })
 }
 
@@ -38,9 +49,12 @@ let mapStateToProps = (state) => {
 }
 
 let mapDispatchToProps = (dispatch) => {
-  return {handleSelection: (sel) => {
-    dispatch(actionUpdateSelection(sel))}
-  } 
+  return {
+      handleSelection: (sel) => {
+        dispatch(actionUpdateSelection(sel))},
+      choiceCountdown: (num) => {
+        dispatch(actionUpdateChoiceCountdown(num))}
+    } 
 }
 
 

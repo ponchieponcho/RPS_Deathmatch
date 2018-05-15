@@ -15,6 +15,7 @@ import { UPDATE_USERNAME,
         UPDATE_OPPONENT,
         UPDATE_WINNER,
         UPDATE_STATUS,
+        UPDATE_CHOICE_COUNTDOWN,
         RESET_STATE } from './actions/users'
 
 const socket = openSocket('http://localhost:8000');
@@ -83,6 +84,11 @@ let reducer = (oldState = initialState, action) => {
         let status = action.payload;
         return {...oldState, status: status}
 
+        case UPDATE_CHOICE_COUNTDOWN:
+        // console.log('TRIGGERED ACTION: UPDATE_CHOICE_COUNTDOWN')
+        let choice_countdown = action.payload;
+        return {...oldState, choice_countdown: choice_countdown}
+
         case RESET_STATE:
         console.log('TRIGGERED ACTION: RESET_STATE')
         let initialState = {
@@ -97,6 +103,7 @@ let reducer = (oldState = initialState, action) => {
             choice_countdown: '',
             opponent: ''
         };
+        
         return initialState;
 
         default:

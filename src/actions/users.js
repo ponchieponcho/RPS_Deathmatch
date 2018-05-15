@@ -9,6 +9,8 @@ export const UPDATE_OPPONENT = 'UPDATE_OPPONENT';
 export const RESET_STATE = 'RESET_STATE';
 export const UPDATE_WINNER = 'UPDATE_WINNER';
 export const UPDATE_STATUS = 'UPDATE_STATUS';
+export const UPDATE_CHOICE_COUNTDOWN = 'UPDATE_CHOICE_COUNTDOWN';
+
 
 
 export const actionUpdateUsername = name => {
@@ -88,6 +90,14 @@ export const actionUpdateStatus = (status) => {
     return {
         type: UPDATE_STATUS,
         payload: status
+    }
+}
+
+export const actionUpdateChoiceCountdown = (number) => {
+    console.log('actionUpdateStatus', number)
+    return {
+        type: UPDATE_CHOICE_COUNTDOWN,
+        payload: number
     }
 }
 
