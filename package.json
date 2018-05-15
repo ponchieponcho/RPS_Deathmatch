@@ -1,7 +1,11 @@
 {
-  "name": "app",
+  "name": "deploy",
   "version": "0.1.0",
   "private": true,
+  "engines": {
+    "npm": "5.7.1",
+    "node": "9.5.0"
+  },
   "dependencies": {
     "nodemon": "^1.17.4",
     "npm": "^6.0.0",
