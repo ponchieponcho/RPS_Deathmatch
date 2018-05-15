@@ -4,7 +4,6 @@ import {Provider} from 'react-redux';
 import {createStore} from 'redux';
 import './styles/styles.css';
 import App from './containers/App';
-import registerServiceWorker from './utils/registerServiceWorker';
 import openSocket from 'socket.io-client';
 import { UPDATE_USERNAME,
         UPDATE_USERS,
@@ -120,5 +119,3 @@ let TopLevel = () =>
     </Provider>
 
 ReactDOM.render(<TopLevel />, document.getElementById('root'));
-
-registerServiceWorker();
