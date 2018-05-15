@@ -54,10 +54,13 @@ emitUsername = () => {
 
  render() {
   return (
-  <Login 
-   handleUsernameInput = {this.props.handleUsernameInput} 
-   emitUsername = {this.emitUsername} 
-  /> 
+    <div className="content-container">
+    <Login 
+    handleUsernameInput = {this.props.handleUsernameInput} 
+    emitUsername = {this.emitUsername} 
+    />
+    <div className="footer"><span>SUBMIT</span><i className="fas fa-angle-right"></i></div> 
+  </div>
   )
   }
 }

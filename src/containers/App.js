@@ -31,20 +31,26 @@ masterReset() {
 
  render() {
   return (
-    <div>
-    <Game />
-    <Router>
-      <Switch>
-      <Route path="/" exact component={LoginPage}/>
-      <Route path="/readyup" exact component={ReadyPage} />
-      <Route path="/choose" exact component={ChoosePage} />
-      <Route path="/wait" exact component={WaitPage} />
-      <Route path="/lost" exact component={LostPage} />
-      <Route path="/won_round" exact component={WonRoundPage} />
-      <Route path="/game_over" exact component={GameOverPage} />
-      </Switch>
-    </Router>
-    <button onClick={() => this.masterReset()}>Master Reset</button>
+    <div className="app-container">
+      <div className="game-container hide-on-mobile">
+      <Game />
+      </div>
+      <div className="mobile-container hide-on-desktop">
+        <div className="header-placeholder"></div>
+        <div className="header"><span>RPS DEATHMATCH</span></div>
+        <Router>
+          <Switch>
+          <Route path="/" exact component={LoginPage}/>
+          <Route path="/readyup" exact component={ReadyPage} />
+          <Route path="/choose" exact component={ChoosePage} />
+          <Route path="/wait" exact component={WaitPage} />
+          <Route path="/lost" exact component={LostPage} />
+          <Route path="/won_round" exact component={WonRoundPage} />
+          <Route path="/game_over" exact component={GameOverPage} />
+          </Switch>
+        </Router>
+        {/* <button onClick={() => this.masterReset()}>Master Reset</button> */}
+      </div>
     </div>
   );
 }

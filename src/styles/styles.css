@@ -1,13 +1,31 @@
-body {
+*, *:before, *:after {
+  box-sizing: inherit;
+}
+
+html {
+  box-sizing: border-box;
+}
+
+body,p {
   margin: 0;
   padding: 0;
-  font-family: sans-serif;
+  font-family: 'Quicksand', sans-serif;
+  font-size: 100%;
+}
+
+li,ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
 }
 
 .hide-on-mobile {
   display: initial;
 }
 
+.hide-on-desktop {
+  display: none;
+}
  /* The switch - the box around the slider */
  .switch {
   position: relative;
@@ -67,13 +85,104 @@ input:checked + .slider:before {
   border-radius: 50%;
 } 
 
+.app-container {
+  /* background-color: antiquewhite; */
+  height: 100vh;
+  width: 100vw;
+}
+
+.mobile-container {
+  background-color: blue;
+  width: 100%;
+  height: 100%;
+}
+
+.game-container {
+  background-color: aqua;
+}
+
+.loginpage-container {
+  background-color: aquamarine;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 80vh;  
+}
+
+.loginpage-container li {
+  margin: 10px;
+}
+
+.loginpage-container span {
+  font-size: 200%;
+}
+input {
+  width: 100%; 
+  padding: 5px 0;
+  text-indent: 5px;
+}
+
+.header-placeholder {
+  background-color: red;
+  height: 10vh;
+  width: 100%;
+}
+
+.header {
+  background-color: green;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 4;
+  height: 10vh;
+  width: 100%;
+}
+
+.header span {
+  display: flex;
+  flex-grow: 1;
+  height: 100%;
+  justify-content: center;
+  align-items: center;
+  font-size: 200%;
+  font-weight: 700;
+  text-shadow: 1px 1px black;
+  color: white;
+}
+
+.content-container {
+  display: flex;
+  flex-direction: column;
+}
+.footer {
+  height: 10vh;
+  background-color: blue;
+  display: flex;
+  align-items: center;
+  font-size: 200%;
+  color: white;
+}
+
+.footer span {
+  margin-left: auto;
+  margin-right: auto;
+}
+.footer i {
+  align-self: center;
+  margin-right: 10px;
+}
 @media only screen and (max-width: 600px) {
   body {
-      background-color: lightblue;
+      /* background-color: forestgreen; */
   }
 
 .hide-on-mobile {
-display: none;
+  display: none;
+}
+
+.hide-on-desktop {
+  display: initial;
 }
 
 }
