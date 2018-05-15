@@ -17,7 +17,7 @@ import { UPDATE_USERNAME,
         UPDATE_CHOICE_COUNTDOWN,
         RESET_STATE } from './actions/users'
 
-const socket = openSocket('https://floating-anchorage-15230.herokuapp.com');
+const socket = openSocket('https://floating-anchorage-15230.herokuapp.com:41144');
 
 let initialState = {
     users: [],
