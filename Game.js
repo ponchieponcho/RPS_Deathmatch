@@ -10,23 +10,16 @@ class Game {
     }
 
     fightStopper() {
-        console.log('fightStopper()')
         if(this.act === 0) {
-            console.log('act before false', this.act)
             this.act++
-            console.log('act after', this.act)
             return false
         } else {
-            console.log('act before true', this.act)
             return true
         }
     }
 
     fightResetter(act) {
-        console.log('fightResetter()')
-        console.log('act before', act) //why undefined?
         this.act = 0;
-        console.log('act after', this.act)
     }
 
     masterReset() {
@@ -137,12 +130,12 @@ class Game {
     vsStart(tournament, sendOpponent, sendWait, sendWin) {
         for (let i = 0 ; i < tournament.length; i++) {
             if (tournament[i].length === 2) {
-                console.log(`${tournament[i][0].username} VS ${tournament[i][1].username}`)
+                // console.log(`${tournament[i][0].username} VS ${tournament[i][1].username}`)
                 sendOpponent(tournament[i][0].username, tournament[i][0].id, tournament[i][1].username, tournament[i][1].id)
                 } 
             else if (tournament[i].length === 1) {
                 if(tournament[i][0].status === "waiting") {
-                    console.log('waiting', tournament[i][0].id)
+                    // console.log('waiting', tournament[i][0].id)
                     sendWait(tournament[i][0].id)
                     this.winners.push(tournament[i][0])
                     } 

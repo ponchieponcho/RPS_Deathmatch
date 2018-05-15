@@ -47,11 +47,6 @@ io.on('connection', (socket) => {
             io.to(playerID).emit('waiting');
           }
 
-          // let sendWin = (playerID) => {
-          //   io.to(playerID).emit('you-win');
-          //   io.emit('push-to-end-screen')
-          // }
-
           game.handlePairUp(game.users)
           game.vsStart(game.tournament, sendOpponent, sendWait)
 
@@ -66,8 +61,8 @@ io.on('connection', (socket) => {
 })
 
   socket.on('fight', () => {
-    console.log('fight firing')
     let checker = game.fightStopper();
+
     if (checker === false) {    
       game.fight()
       console.log('************')
@@ -81,7 +76,7 @@ io.on('connection', (socket) => {
       }
 
       if (game.winners.length === 1) {
-        console.log('***** game over *****')
+        // console.log('***** game over *****')
         io.emit('game-over', game.winners[0].username)
       } else {
         for (let i = 0; i < game.winners.length; i++) {
@@ -126,8 +121,9 @@ io.on('connection', (socket) => {
   })
 
   socket.on('master-reset', () => {
-    io.emit('reset-to-users')
     game.masterReset();
+    console.log('users on server after reset:', game.users)
+    io.emit('reset-to-users')
   })
 })
 

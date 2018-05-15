@@ -9,7 +9,7 @@ import {actionUpdateSelection, actionUpdateChoiceCountdown} from '../actions/use
 
 class ChoosePage extends Component {
 
-componentDidMount() {
+componentDidMount() { //look here for error
   this.props.socket.on('choice-countdown', () => {
     let num = 10
     let interval = null;
@@ -17,7 +17,7 @@ componentDidMount() {
       if (num >= 1) {
         this.props.choiceCountdown(num)
         num--;
-      } else {
+      } else { 
         console.log('done')
         clearInterval(interval)
         this.props.socket.emit('fight')

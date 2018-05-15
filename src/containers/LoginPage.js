@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { withRouter } from "react-router-dom";
 import {connect} from 'react-redux';
 
-import {actionUpdateUsername, actionResetState, actionUpdateWinner} from '../actions/users'
+import {actionUpdateUsername, actionUpdateWinner} from '../actions/users'
 import Login from '../components/Login';
 
 class LoginPage extends Component {
@@ -12,11 +12,6 @@ componentDidMount() {
   console.log('pushing to choice')
     this.props.history.push("/choose")
   })
-
-  this.props.socket.on('reset-to-users', () => {
-    this.props.resetState(this.props.id);
-    this.props.history.push("/");
-    })
 
   this.props.socket.on('you-lost', () => {
     console.log('pushing to lost')
@@ -78,8 +73,6 @@ let mapDispatchToProps = (dispatch) => {
   return {
     handleUsernameInput: (input) => {
         dispatch(actionUpdateUsername(input)) },
-    resetState: (id) => {
-        dispatch(actionResetState(id)) },
     updateWinner: (id) => {
       dispatch(actionUpdateWinner(id)) } 
   }

@@ -1,12 +1,14 @@
 import React, { Component } from 'react';
 import {connect} from 'react-redux';
+import { withRouter } from "react-router-dom";
 
 import TotalUsers from '../components/TotalUsers';
 import ReadyCountdown from '../components/ReadyCountdown';
 
 
 import {actionUpdateUsers,
-        actionUpdateCountdown} from '../actions/users';
+        actionUpdateCountdown,
+        actionResetState} from '../actions/users';
 
 class Game extends Component {
 
@@ -19,6 +21,11 @@ class Game extends Component {
     this.props.socket.on('countdown-numbers', number => {
       this.props.dispatch(actionUpdateCountdown(number))
     })
+
+    this.props.socket.on('reset-to-users', () => {
+      this.props.dispatch(actionResetState(this.props.id))
+      this.props.history.push("/");
+      })
 
   }
 
@@ -36,7 +43,8 @@ class Game extends Component {
 let mapStateToProps = (state) => { 
   return {
     socket: state.socket,
-    countdown: state.countdown
+    countdown: state.countdown,
+    id: state.id
   };
 }
 
@@ -44,4 +52,4 @@ let mapDispatchToProps = (dispatch) => {
   return {dispatch:dispatch}
 }
 
-export default connect(mapStateToProps,mapDispatchToProps)(Game);
+export default connect(mapStateToProps,mapDispatchToProps)(withRouter(Game));

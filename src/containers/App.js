@@ -17,6 +17,7 @@ class App extends Component {
  
 componentDidMount() {
   // this.props.socket.emit('master-reset')
+  console.log('state', this.props.state)
   this.props.socket.on('connect', () => {
     this.props.socket.on('clientid', id => {
       console.log('Socket id: ',id)
@@ -25,20 +26,17 @@ componentDidMount() {
   })
 }
 
-masterReset() {
-  this.props.socket.emit('master-reset')
-}
-
  render() {
   return (
     <div className="app-container">
       {/* <div className="game-container"> */}
-      <Game />
       {/* </div> */}
        {/* <div className="mobile-container "> */}
         {/* <div className="header-placeholder"></div> */}
         {/* <div className="header"><span>RPS DEATHMATCH</span></div> */}
         <Router>
+          <div>
+          <Game />
           <Switch>
           <Route path="/" exact component={LoginPage}/>
           <Route path="/readyup" exact component={ReadyPage} />
@@ -48,8 +46,8 @@ masterReset() {
           <Route path="/won_round" exact component={WonRoundPage} />
           <Route path="/game_over" exact component={GameOverPage} />
           </Switch>
+          </div>
         </Router>
-        {/* <button onClick={() => this.masterReset()}>Master Reset</button> */}
       {/* </div> */}
     </div>
   );
@@ -58,7 +56,8 @@ masterReset() {
 
 let mapStateToProps = (state) => { 
   return {
-    socket: state.socket
+    socket: state.socket,
+    state: state
   };
 }
 

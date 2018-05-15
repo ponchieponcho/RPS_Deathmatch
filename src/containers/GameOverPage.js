@@ -8,10 +8,15 @@ componentDidMount() {
   
 }
 
+masterReset() {
+  this.props.socket.emit('master-reset')
+}
+
  render() {
   return (
     <div>
-    Game Over! The winner is {this.props.winner}
+    <span>Game Over! The winner is {this.props.winner} </span>
+    <button onClick={() => this.masterReset()}>Restart</button>
     </div>
   );
 }
@@ -19,7 +24,8 @@ componentDidMount() {
 
 let mapStateToProps = (state) => { 
   return {
-    winner: state.winner
+    winner: state.winner,
+    socket: state.socket
     };
 }
 
