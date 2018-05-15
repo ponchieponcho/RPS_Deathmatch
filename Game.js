@@ -22,9 +22,9 @@ class Game {
         }
     }
 
-    fightResetter() {
+    fightResetter(act) {
         console.log('fightResetter()')
-        console.log('act before', this.act) //why undefined?
+        console.log('act before', act) //why undefined?
         this.act = 0;
         console.log('act after', this.act)
     }

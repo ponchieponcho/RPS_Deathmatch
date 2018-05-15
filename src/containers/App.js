@@ -32,12 +32,12 @@ masterReset() {
  render() {
   return (
     <div className="app-container">
-      <div className="game-container hide-on-mobile">
+      {/* <div className="game-container"> */}
       <Game />
-      </div>
-      <div className="mobile-container hide-on-desktop">
-        <div className="header-placeholder"></div>
-        <div className="header"><span>RPS DEATHMATCH</span></div>
+      {/* </div> */}
+       {/* <div className="mobile-container "> */}
+        {/* <div className="header-placeholder"></div> */}
+        {/* <div className="header"><span>RPS DEATHMATCH</span></div> */}
         <Router>
           <Switch>
           <Route path="/" exact component={LoginPage}/>
@@ -50,7 +50,7 @@ masterReset() {
           </Switch>
         </Router>
         {/* <button onClick={() => this.masterReset()}>Master Reset</button> */}
-      </div>
+      {/* </div> */}
     </div>
   );
 }

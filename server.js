@@ -10,8 +10,8 @@ const port = 8000;
 let game = new Game();
 
 io.on('connection', (socket) => {
+
   console.log('Socket id: ',socket.id)
-  // console.log(game.users)
   io.emit('current-users', game.users)
   socket.emit('clientid', socket.id)
   
@@ -98,12 +98,12 @@ io.on('connection', (socket) => {
           console.log(`******Emiting your-opponent to: ${oneId}******`)
           io.to(`${oneId}`).emit('your-opponent', twoUsername);
           io.to(`${oneId}`).emit('push-to-choice');
-          // io.to(oneId).emit('choice-countdown');
+          io.to(oneId).emit('choice-countdown');
     
           console.log(`******Emiting your-opponent to: ${twoId}******`)
           io.to(`${twoId}`).emit('your-opponent', oneUsername);
           io.to(`${twoId}`).emit('push-to-choice');
-          // io.to(twoId).emit('choice-countdown');
+          io.to(twoId).emit('choice-countdown');
         }
     
         let sendWait = (playerID) => {
@@ -112,7 +112,9 @@ io.on('connection', (socket) => {
 
         game.handlePairUp(game.winners)
         game.vsStart(game.tournament, sendOpponent, sendWait)
-        setTimeout(game.fightResetter, 5000)
+        setTimeout(() => {
+          game.fightResetter(game.act);
+        },4000)
     }
 }
 }
