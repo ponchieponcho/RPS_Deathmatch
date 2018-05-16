@@ -32,8 +32,22 @@ class Game extends Component {
  render() {
   return (
     <div className="desktop-container hide-on-mobile">
-      {this.props.countdown === 1 ? <div></div> : <ReadyCountdown countdown={this.props.countdown}/>}
-      <TotalUsers />
+      <div className="users-list-container">
+        <span>
+          <span>Players</span>
+        </span>
+        <div className="all-users">
+          <TotalUsers />
+        </div>
+      </div>
+      <div className="logo-and-status-container">
+          <div className="logo-container">
+            <div className="logo"></div>
+          </div>
+          <div className="countdown-container">
+            {this.props.countdown <= 1 ? <div></div> : <ReadyCountdown countdown={this.props.countdown}/>}
+          </div>
+      </div>
     </div>
   );
   }

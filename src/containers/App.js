@@ -28,10 +28,6 @@ componentDidMount() {
  render() {
   return (
     <div className="app-container">
-      
-      
-    
-        
         <Router>
           <div className="router-container">
             <Game />

@@ -11,6 +11,8 @@ body,p {
   padding: 0;
   font-family: 'Quicksand', sans-serif;
   font-size: 100%;
+  color: white;
+  text-shadow: .5px .5px black;
 }
 
 li,ul {
@@ -101,14 +103,113 @@ input:checked + .slider:before {
 }
 
 .mobile-container {
-  background-color: blue;
+  background-color: #70C3BD;
   width: 100%;
   height: 100%;
   padding-top: 17.5%;
 }
 
 .desktop-container {
-  background-color: aqua;
+  /* background-color: aqua; */
+  height: inherit;
+  width: inherit;
+  display: flex;
+  min-height: 525px;
+  min-width: 649px;
+}
+
+.users-list-container {
+  background-color: white;
+  position: relative;
+  flex-basis: auto;
+  min-width: 200px;
+  box-shadow: 3px 0px 5px 0px rgba(23,0,0,.5);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.users-list-container span {
+  background-color: #4B77BE;
+  width: 100%;
+  height: 8%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.users-list-container span span {
+  color:white;
+  text-shadow: .5px .5px black;
+  font-weight: 400;
+  font-size: 150%;
+}
+
+.all-users {
+  background-color:  #1F4788;
+  height: 100%;
+  width: 100%;
+}
+
+.users div:nth-child(odd){
+  background-color: rgba(128, 128, 128, 0.329);
+  padding: 10px;
+}
+
+.users div:nth-child(even){
+  background-color: rgba(85, 85, 85, 0.329);
+  padding: 10px;
+}
+
+.user {
+  display: flex;
+  justify-content: space-between;
+}
+
+.red {
+  color: rgb(228, 87, 87);
+}
+
+.green {
+ color: rgb(59, 224, 59);
+}
+
+.logo-and-status-container {
+  background-color: salmon;
+  flex-basis: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.logo-container {
+  background-color: #70C3BD;
+  flex-basis: 70%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.logo {
+  height: 80%;
+  width: 80%;
+  background-image: url("../images/LOGO_RPS.png");
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+.countdown-container {
+  background-color: #70C3BD;
+  flex-basis: 30%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 1px solid grey;
+}
+
+.countdown-desktop {
+  font-size: 400%;
+  font-weight: 700;
 }
 
 .content-container {
@@ -133,6 +234,8 @@ input:checked + .slider:before {
 
 .loginpage-container span {
   font-size: 200%;
+  color: white;
+  text-shadow: .5px .5px black;
 }
 
 input {
@@ -168,7 +271,7 @@ input {
 }
 
 .header {
-  background-color: #39B5AC;
+  background-color: #ef5b7f;
   position: absolute;
   top: 0;
   left: 0;
@@ -187,6 +290,7 @@ input {
   font-weight: 500;
   text-shadow: 1px 1px black;
   color: white;
+  box-shadow: 0px 2px 5px 0px rgba(239,91,127,.5);
 }
 
 
@@ -202,9 +306,12 @@ input {
 
 .ready-page-container > * {
   margin: 10px;
+  color: white;
+  text-shadow: .5px .5px black;
 }
 
-@media only screen and (max-width: 600px) {
+@media only screen 
+       and (max-width: 648px) {
 
 .hide-on-mobile {
   display: none;
@@ -213,5 +320,6 @@ input {
 .hide-on-desktop {
   display: block;
 }
+
 
 }
