@@ -31,9 +31,9 @@ class Game extends Component {
 
  render() {
   return (
-    <div className="desktop-container">
-    {this.props.countdown === 1 ? <div></div> : <ReadyCountdown countdown={this.props.countdown}/>}
-    <TotalUsers />
+    <div className="desktop-container hide-on-mobile">
+      {this.props.countdown === 1 ? <div></div> : <ReadyCountdown countdown={this.props.countdown}/>}
+      <TotalUsers />
     </div>
   );
   }

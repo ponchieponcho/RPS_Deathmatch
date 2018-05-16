@@ -3,6 +3,7 @@ import {HashRouter as Router, Route, Switch} from 'react-router-dom';
 import {connect} from 'react-redux';
 
 import Game from './Game';
+import Header from '../components/Header';
 import ReadyPage from './ReadyPage';
 import LoginPage from './LoginPage';
 import ChoosePage from './ChoosePage';
@@ -27,26 +28,27 @@ componentDidMount() {
  render() {
   return (
     <div className="app-container">
-      {/* <div className="game-container"> */}
-      {/* </div> */}
-       {/* <div className="mobile-container "> */}
-        {/* <div className="header-placeholder"></div> */}
-        {/* <div className="header"><span>RPS DEATHMATCH</span></div> */}
+      
+      
+    
+        
         <Router>
-          <div>
-          <Game />
-          <Switch>
-          <Route path="/" exact component={LoginPage}/>
-          <Route path="/readyup" exact component={ReadyPage} />
-          <Route path="/choose" exact component={ChoosePage} />
-          <Route path="/wait" exact component={WaitPage} />
-          <Route path="/lost" exact component={LostPage} />
-          <Route path="/won_round" exact component={WonRoundPage} />
-          <Route path="/game_over" exact component={GameOverPage} />
-          </Switch>
+          <div className="router-container">
+            <Game />
+            <div className="mobile-container hide-on-desktop">
+            <Header />
+            <Switch>
+            <Route path="/" exact component={LoginPage}/>
+            <Route path="/readyup" exact component={ReadyPage} />
+            <Route path="/choose" exact component={ChoosePage} />
+            <Route path="/wait" exact component={WaitPage} />
+            <Route path="/lost" exact component={LostPage} />
+            <Route path="/won_round" exact component={WonRoundPage} />
+            <Route path="/game_over" exact component={GameOverPage} />
+            </Switch>
+            </div>
           </div>
         </Router>
-      {/* </div> */}
     </div>
   );
 }

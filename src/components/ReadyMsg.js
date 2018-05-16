@@ -4,7 +4,7 @@ let ReadyMsg = ({ready}) => {
     if(ready===false){
         return <p>READY UP!</p>
     } else {
-        return <p>YOU READY AS HELL NOW, DAWG!</p>
+        return <p>PREPARE TO FIGHT!</p>
     }
 }
   
