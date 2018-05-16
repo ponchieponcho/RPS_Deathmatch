@@ -36,7 +36,7 @@ togglePlayerReady = () => {
     <div>
     <WelcomeUser name={this.props.username}/>
     <ReadyMsg ready={this.props.ready}/>
-    <ReadyToggle togglePlayerReady={this.togglePlayerReady} />
+    {this.props.users.length < 2 ? <span>Waiting on one more opponent...</span> : <ReadyToggle togglePlayerReady={this.togglePlayerReady} />}
   </div>
   );
 }
@@ -46,7 +46,8 @@ let mapStateToProps = (state) => {
   return {
     ready: state.ready,
     username: state.username,
-    socket: state.socket
+    socket: state.socket,
+    users: state.users
     };
 }
 

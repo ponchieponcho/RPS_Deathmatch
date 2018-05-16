@@ -21,6 +21,7 @@ componentDidMount() { //look here for error
         console.log('done')
         clearInterval(interval)
         this.props.socket.emit('fight')
+        num = 10;
       }
     }, 1000)
   })
@@ -30,9 +31,8 @@ render() {
   return (
     <div>
       YOU: {this.props.username} VS OPPONENT:{this.props.opponent}
-    <ChoiceCountdown choice_countdown={this.props.choice_countdown}/>
     <Options handleSelection={this.props.handleSelection}/>
-    <button onClick={ () => this.props.socket.emit('fight')}>Fight</button>
+    <ChoiceCountdown choice_countdown={this.props.choice_countdown}/>
     </div>
   );
 }
