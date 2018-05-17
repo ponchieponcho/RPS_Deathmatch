@@ -37,7 +37,7 @@ render() {
       <span>{this.props.opponent}</span>
      </div>
     <Options handleSelection={this.props.handleSelection}/>
-    <ChoiceCountdown choice_countdown={this.props.choice_countdown}/>
+    {this.props.choice_countdown > 1 ? <ChoiceCountdown choice_countdown={this.props.choice_countdown}/> : <div></div>}
     </div>
   );
 }

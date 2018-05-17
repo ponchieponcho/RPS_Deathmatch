@@ -203,14 +203,46 @@ input:checked + .slider:before {
   background-color: #70C3BD;
   flex-basis: 30%;
   display: flex;
+  flex-direction: column;
+}
+
+.status-header {
+  background-color: grey;
+  min-height: 7vh;
+  display: flex;
+  padding-left: 3vw;
+  align-items: center;
+  border-bottom: 2px solid #ffffff;
+  border-top: 2px solid #ffffff;
+  font-size: 150%;
+}
+
+.running-desktop {
+  display: flex;
   justify-content: center;
   align-items: center;
-  border: 1px solid grey;
+  height: 100%;
+  font-size: 200%;
+  font-weight: 700;
+}
+
+.winner-desktop {
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 200%;
+  font-weight: 700;
+  color: gold;
 }
 
 .countdown-desktop {
-  font-size: 400%;
+  font-size: 200%;
   font-weight: 700;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
 }
 
 .content-container {
@@ -219,6 +251,8 @@ input:checked + .slider:before {
   width: inherit;
   height: inherit;
 }
+
+
 
 .loginpage-container {
   background-color: #70C3BD;
@@ -323,6 +357,18 @@ input {
   text-shadow: .5px .5px black;
 }
 
+.countdown-mobile {
+  background-color: #ef5b7f;
+  border: 3px solid #ef5b7f;
+  border-radius: 50%;
+  width: 15vw;
+  height: 14vw;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 150%;
+}
 
 
 .wait-page-container {
@@ -467,6 +513,30 @@ input {
   margin-top: 5%;
 }
 
+.countdown-bg {
+  background-color: #ef5b7f;
+  width: 20vw;
+  height: 20vw;
+  position: absolute;
+  bottom: 10px;
+  left: 10px;
+  border-radius: 50%;
+}
+
+.choice-num {
+  width: 20vw;
+  height: 20vw;
+  position: absolute;
+  bottom: 0px;
+  left: 0px;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 200%;
+  font-weight: 500;
+}
+
 .rps-radio label svg {
   fill: white;
   width: 20vw;
@@ -549,14 +619,17 @@ input[class="scissors"]:focus + svg {
 }
 
 .winner-name {
-  position: absolute;
   z-index: 4;
-  left:auto;
-  right:auto;
-  top: 67%;
-  bottom: 25%;
   font-weight: 700;
-  font-size: 150%
+  font-size: 150%;
+  width: 20vw;
+  height: auto;
+  position: relative;
+  bottom: 23vw;
+  left: 0vw;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .win-footer {
@@ -582,32 +655,6 @@ input[class="scissors"]:focus + svg {
 .win-footer i {
   align-self: center;
   margin-right: 10px;
-}
-
-@media only screen 
-       and (min-width: 420px) {
-
-  .winner-name {
-    position: absolute;
-    z-index: 4;
-    left:auto;
-    right:auto;
-    top: 69%;
-    bottom: 25%;
-  }
-}
-
-@media only screen 
-and (min-height: 880px) {
-
-  .winner-name {
-    position: absolute;
-    z-index: 4;
-    left:auto;
-    right:auto;
-    top: 66%;
-    bottom: 25%;
-  }
 }
 
 @media only screen 

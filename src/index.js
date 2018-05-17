@@ -109,7 +109,9 @@ let reducer = (oldState = initialState, action) => {
             id: action.payload,
             countdown: '',
             choice_countdown: '',
-            opponent: ''
+            opponent: '',
+            winner: '',
+            isRunning: false,
         };
         
         return initialState;

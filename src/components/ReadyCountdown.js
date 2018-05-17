@@ -5,7 +5,7 @@ let ReadyCountdown = ({countdown}) => {
 
     return(
     <div className="countdown-desktop">
-        {countdown}
+        Game starting in...{countdown}
     </div>
     )
 }

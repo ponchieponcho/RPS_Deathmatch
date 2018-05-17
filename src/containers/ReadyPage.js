@@ -5,6 +5,7 @@ import {connect} from 'react-redux';
 import WelcomeUser from '../components/WelcomeUser';
 import ReadyToggle from '../components/ReadyToggle';
 import ReadyMsg from '../components/ReadyMsg';
+import ReadyCountdownMobile from '../components/ReadyCountdownMobile';
 
 import {actionUpdateReady} from '../actions/users';
 import {actionUpdateOpponent} from '../actions/users';
@@ -37,6 +38,7 @@ togglePlayerReady = () => {
       <WelcomeUser name={this.props.username}/>
       <ReadyMsg ready={this.props.ready}/>
       {this.props.users.length < 2 ? <span><li>Waiting on one</li><li>more opponent...</li></span> : <ReadyToggle togglePlayerReady={this.togglePlayerReady} />}
+      {this.props.countdown <= 1 ? <div></div> : <ReadyCountdownMobile countdown={this.props.countdown}/>}
   </div>
   );
 }
@@ -47,7 +49,8 @@ let mapStateToProps = (state) => {
     ready: state.ready,
     username: state.username,
     socket: state.socket,
-    users: state.users
+    users: state.users,
+    countdown: state.countdown
     };
 }
 

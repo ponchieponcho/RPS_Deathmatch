@@ -45,7 +45,10 @@ class Game extends Component {
             <div className="logo"></div>
           </div>
           <div className="countdown-container">
+            <div className="status-header">GAME STATUS</div>
+            {this.props.isRunning === false ? <div className="running-desktop">[ Waiting for players to join ]</div> : <div className="running-desktop">[ RPS Deathmatch has started! ]</div>}
             {this.props.countdown <= 1 ? <div></div> : <ReadyCountdown countdown={this.props.countdown}/>}
+            {this.props.winner === '' ?  <div></div>: <div className="winner-desktop">{this.props.winner} is the winner!</div> }
           </div>
       </div>
     </div>
@@ -58,7 +61,9 @@ let mapStateToProps = (state) => {
   return {
     socket: state.socket,
     countdown: state.countdown,
-    id: state.id
+    id: state.id,
+    isRunning: state.isRunning,
+    winner: state.winner
   };
 }
 
