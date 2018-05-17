@@ -9,7 +9,7 @@ import {actionUpdateSelection, actionUpdateChoiceCountdown} from '../actions/use
 
 class ChoosePage extends Component {
 
-componentDidMount() { //look here for error
+componentDidMount() {
   this.props.socket.on('choice-countdown', () => {
     let num = 10
     let interval = null;
@@ -29,8 +29,11 @@ componentDidMount() { //look here for error
 
 render() {
   return (
-    <div>
-      YOU: {this.props.username} VS OPPONENT:{this.props.opponent}
+    <div className="choose-page-container">
+      <div className="vs">
+      <span className="vs-text">VS</span>
+      <span>{this.props.opponent}</span>
+     </div>
     <Options handleSelection={this.props.handleSelection}/>
     <ChoiceCountdown choice_countdown={this.props.choice_countdown}/>
     </div>

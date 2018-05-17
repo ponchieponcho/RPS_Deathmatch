@@ -14,7 +14,7 @@ componentDidMount() {
 
  render() {
   return (
-    <div>
+    <div className="wait-page-container">
     {this.props.status === 'wait-continue' ? <div>Next round is about to start...</div> : <div>Waiting on next round for opponent</div>}
     </div>
   );

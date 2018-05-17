@@ -2,6 +2,9 @@
 	"folders": [
 		{
 			"path": "src"
+		},
+		{
+			"path": "C:\\Users\\lamia\\Desktop\\RPS_Deathmatch_Server"
 		}
 	],
 	"settings": {}
