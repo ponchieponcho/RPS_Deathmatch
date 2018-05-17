@@ -15,6 +15,7 @@ import { UPDATE_USERNAME,
         UPDATE_WINNER,
         UPDATE_STATUS,
         UPDATE_CHOICE_COUNTDOWN,
+        UPDATE_RUNNING,
         RESET_STATE } from './actions/users'
 
 const socket = openSocket('https://floating-anchorage-15230.herokuapp.com');
@@ -32,7 +33,8 @@ let initialState = {
     countdown: '',
     choice_countdown: '',
     opponent: '',
-    winner: ''
+    winner: '',
+    isRunning: false,
 };
 
 let reducer = (oldState = initialState, action) => {
@@ -89,6 +91,11 @@ let reducer = (oldState = initialState, action) => {
         // console.log('TRIGGERED ACTION: UPDATE_CHOICE_COUNTDOWN')
         let choice_countdown = action.payload;
         return {...oldState, choice_countdown: choice_countdown}
+
+        case UPDATE_RUNNING:
+        console.log('TRIGGERED ACTION: UPDATE_RUNNING')
+        let isRunning = action.payload;
+        return {...oldState, isRunning: isRunning}
 
         case RESET_STATE:
         console.log('TRIGGERED ACTION: RESET_STATE')

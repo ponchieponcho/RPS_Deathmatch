@@ -239,6 +239,8 @@ input:checked + .slider:before {
   text-shadow: .5px .5px black;
 }
 
+
+
 input {
   width: 100%; 
   padding: 5px 0;
@@ -271,6 +273,16 @@ input {
   margin-right: 10px;
 }
 
+.footer-submit {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.footer-nextgame {
+  margin-left: auto;
+  margin-right: auto;
+  font-size: 75%;
+}
 .header {
   background-color: #ef5b7f;
   position: absolute;

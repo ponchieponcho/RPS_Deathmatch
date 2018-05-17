@@ -10,8 +10,7 @@ export const RESET_STATE = 'RESET_STATE';
 export const UPDATE_WINNER = 'UPDATE_WINNER';
 export const UPDATE_STATUS = 'UPDATE_STATUS';
 export const UPDATE_CHOICE_COUNTDOWN = 'UPDATE_CHOICE_COUNTDOWN';
-
-
+export const UPDATE_RUNNING = 'UPDATE_RUNNING';
 
 export const actionUpdateUsername = name => {
     // console.log('actionUpdateUsername', name)
@@ -62,7 +61,7 @@ export const actionUpdateSelection = sel => {
 }
 
 export const actionUpdateOpponent = opponent => {
-    console.log('actionUpdateOpponent', opponent)
+    // console.log('actionUpdateOpponent', opponent)
     return {
         type: UPDATE_OPPONENT,
         payload: opponent
@@ -70,7 +69,7 @@ export const actionUpdateOpponent = opponent => {
 }
 
 export const actionResetState = (id) => {
-    console.log('actionResetState', id)
+    // console.log('actionResetState', id)
     return {
         type: RESET_STATE,
         payload: id
@@ -78,7 +77,7 @@ export const actionResetState = (id) => {
 }
 
 export const actionUpdateWinner = (name) => {
-    console.log('actionUpdateWinner', name)
+    // console.log('actionUpdateWinner', name)
     return {
         type: UPDATE_WINNER,
         payload: name
@@ -86,7 +85,7 @@ export const actionUpdateWinner = (name) => {
 }
 
 export const actionUpdateStatus = (status) => {
-    console.log('actionUpdateStatus', status)
+    // console.log('actionUpdateStatus', status)
     return {
         type: UPDATE_STATUS,
         payload: status
@@ -94,10 +93,18 @@ export const actionUpdateStatus = (status) => {
 }
 
 export const actionUpdateChoiceCountdown = (number) => {
-    console.log('actionUpdateStatus', number)
+    // console.log('actionUpdateStatus', number)
     return {
         type: UPDATE_CHOICE_COUNTDOWN,
         payload: number
+    }
+}
+
+export const actionUpdateRunning = (status) => {
+    console.log('actionUpdateRunning', status)
+    return {
+        type: UPDATE_RUNNING,
+        payload: status
     }
 }
 

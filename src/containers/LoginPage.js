@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { withRouter } from "react-router-dom";
 import {connect} from 'react-redux';
 
-import {actionUpdateUsername, actionUpdateWinner} from '../actions/users'
+import {actionUpdateUsername, actionUpdateWinner, actionUpdateRunning} from '../actions/users'
 import Login from '../components/Login';
 
 class LoginPage extends Component {
@@ -29,6 +29,11 @@ componentDidMount() {
     this.props.history.push("/game_over");
   })
 
+  this.props.socket.on('running-flag', (status) => {
+    this.props.updateRunning(status);
+    console.log('changing ready flag')
+  })
+
 }
 
 emitUsername = () => {
@@ -51,10 +56,16 @@ emitUsername = () => {
   return (
     <div className="content-container">
       <Login handleUsernameInput = {this.props.handleUsernameInput} />
+      {this.props.isRunning === false ? 
       <div className="footer" onClick={() => this.emitUsername()}>
-        <span>SUBMIT</span>
+        <span className="footer-submit">SUBMIT</span>
         <i className="fas fa-angle-right"></i>
       </div> 
+      :
+      <div className="footer">
+        <span className="footer-nextgame">WAITING FOR NEXT GAME</span>
+    </div> 
+      }
   </div>
   )
   }
@@ -65,7 +76,8 @@ let mapStateToProps = (state) => {
     socket: state.socket,
     username: state.username,
     ready: state.ready,
-    id: state.id
+    id: state.id,
+    isRunning: state.isRunning
   };
 }
 
@@ -74,7 +86,9 @@ let mapDispatchToProps = (dispatch) => {
     handleUsernameInput: (input) => {
         dispatch(actionUpdateUsername(input)) },
     updateWinner: (id) => {
-      dispatch(actionUpdateWinner(id)) } 
+      dispatch(actionUpdateWinner(id)) },
+    updateRunning: (status) => {
+      dispatch(actionUpdateRunning(status)) } 
   }
 }
 

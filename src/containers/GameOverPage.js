@@ -10,6 +10,7 @@ componentDidMount() {
 
 masterReset() {
   this.props.socket.emit('master-reset')
+  this.props.socket.emit('game-end', false)
 }
 
  render() {

@@ -25,6 +25,8 @@ componentDidMount() {
       }
     }, 1000)
   })
+  
+  this.props.socket.emit('game-start', true)
 }
 
 render() {
