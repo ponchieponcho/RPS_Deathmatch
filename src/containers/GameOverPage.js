@@ -16,7 +16,7 @@ masterReset() {
  render() {
   return (
     <div className="gameover-page-container">
-    <svg className="winner-icon" xmlns="http://www.w3.org/2000/svg"  xlinkHref="http://www.w3.org/1999/xlink" viewBox="0 0 521.45 700.03">
+    <svg className="winner-icon" id="trophie" xmlns="http://www.w3.org/2000/svg"  xlinkHref="http://www.w3.org/1999/xlink" viewBox="0 0 521.45 700.03">
       <defs>
       <filter id="75b73330-6db2-4c3c-be63-97937d7d1c2a" filterUnits="userSpaceOnUse" colorInterpolationFilters="sRGB">
       <feColorMatrix values="-1 0 0 0 1 0 -1 0 0 1 0 0 -1 0 1 0 0 0 1 0"/>
