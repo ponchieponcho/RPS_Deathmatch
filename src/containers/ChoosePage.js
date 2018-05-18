@@ -5,7 +5,9 @@ import {connect} from 'react-redux';
 import Options from '../components/Options';
 import ChoiceCountdown from '../components/ChoiceCountdown';
 
-import {actionUpdateSelection, actionUpdateChoiceCountdown} from '../actions/users';
+import {actionUpdateSelection, 
+      actionUpdateChoiceCountdown,
+      actionUpdateStatus} from '../actions/users';
 
 class ChoosePage extends Component {
 
@@ -26,6 +28,11 @@ componentDidMount() {
     }, 1000)
   })
   
+  this.props.socket.on('change-status', (status) => {
+    console.log('Status recieved', status)
+    this.props.changeStatus(status)
+  })
+
   this.props.socket.emit('game-start', true)
 }
 
@@ -33,8 +40,8 @@ render() {
   return (
     <div className="choose-page-container">
       <div className="vs">
-      <span className="vs-text">VS</span>
-      <span>{this.props.opponent}</span>
+        <span className="vs-text">VS {this.props.opponent}</span>
+        <span>{this.props.status === 'tied' ? <div>You Tied...Choose Again</div>: <div></div>}</span>
      </div>
     <Options handleSelection={this.props.handleSelection}/>
     {this.props.choice_countdown > 1 ? <ChoiceCountdown choice_countdown={this.props.choice_countdown}/> : <div></div>}
@@ -49,7 +56,8 @@ let mapStateToProps = (state) => {
     choice_countdown: state.choice_countdown,
     opponent: state.opponent,
     socket: state.socket,
-    username: state.username
+    username: state.username,
+    status: state.status
     };
 }
 
@@ -58,7 +66,9 @@ let mapDispatchToProps = (dispatch) => {
       handleSelection: (sel) => {
         dispatch(actionUpdateSelection(sel))},
       choiceCountdown: (num) => {
-        dispatch(actionUpdateChoiceCountdown(num))}
+        dispatch(actionUpdateChoiceCountdown(num))},
+      changeStatus: (status) => {
+        dispatch(actionUpdateStatus(status))}
     } 
 }
 

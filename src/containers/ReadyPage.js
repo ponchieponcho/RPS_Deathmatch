@@ -35,10 +35,14 @@ togglePlayerReady = () => {
  render() {
   return (
     <div className="ready-page-container">
-      <WelcomeUser name={this.props.username}/>
-      <ReadyMsg ready={this.props.ready}/>
-      {this.props.users.length < 2 ? <span><li>Waiting on one</li><li>more opponent...</li></span> : <ReadyToggle togglePlayerReady={this.togglePlayerReady} />}
-      {this.props.countdown <= 1 ? <div></div> : <ReadyCountdownMobile countdown={this.props.countdown}/>}
+      <div className="ready-top">
+        <WelcomeUser name={this.props.username}/>
+        <ReadyMsg ready={this.props.ready}/>
+      </div>
+      <div className="ready-bottom">
+      {this.props.users.length < 2 ? <span className="ready-toggle">Waiting on one more opponent...</span> : <ReadyToggle togglePlayerReady={this.togglePlayerReady} />}
+      {this.props.countdown <= 1 ? <div className="ready-countdown-bottom"></div> : <div className="ready-countdown-bottom"><ReadyCountdownMobile countdown={this.props.countdown}/></div>}
+      </div>
   </div>
   );
 }

@@ -33,6 +33,7 @@ componentDidMount() {
             <Game />
             <div className="mobile-container hide-on-desktop">
             <Header />
+            <div className="placeholder"></div>
             <Switch>
             <Route path="/" exact component={LoginPage}/>
             <Route path="/readyup" exact component={ReadyPage} />

@@ -2,10 +2,12 @@ import React, { Component } from 'react';
 import { withRouter } from "react-router-dom";
 import {connect} from 'react-redux';
 
+import {actionUpdateStatus} from '../actions/users'
+
 class LostPage extends Component {
 
 componentDidMount() {
-  
+  this.props.updateStatus('lost')
 }
 
  render() {
@@ -42,7 +44,9 @@ let mapStateToProps = (state) => {
 }
 
 let mapDispatchToProps = (dispatch) => {
-  return {dispatch:dispatch} 
+  return { updateStatus: (status) => {
+    dispatch(actionUpdateStatus(status)) } 
+  } 
 }
 
 

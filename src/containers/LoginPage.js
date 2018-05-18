@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { withRouter } from "react-router-dom";
 import {connect} from 'react-redux';
 
-import {actionUpdateUsername, actionUpdateWinner, actionUpdateRunning} from '../actions/users'
+import {actionUpdateUsername, actionUpdateWinner, actionUpdateRunning, actionUpdateStatus} from '../actions/users'
 import Login from '../components/Login';
 
 class LoginPage extends Component {
@@ -24,6 +24,7 @@ componentDidMount() {
   })
 
   this.props.socket.on('game-over', (winnerName) => {
+    this.props.updateStatus('gameover')
     this.props.updateWinner(winnerName);
     console.log('pushing to game_over')
     this.props.history.push("/game_over");
@@ -88,7 +89,9 @@ let mapDispatchToProps = (dispatch) => {
     updateWinner: (id) => {
       dispatch(actionUpdateWinner(id)) },
     updateRunning: (status) => {
-      dispatch(actionUpdateRunning(status)) } 
+      dispatch(actionUpdateRunning(status)) },
+    updateStatus: (status) => {
+        dispatch(actionUpdateStatus(status)) } 
   }
 }
 
