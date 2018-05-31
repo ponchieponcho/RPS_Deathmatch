@@ -2,7 +2,7 @@
 
 > RPS Deathmatch is an online multiplayer game where opponents may face-off against each other in a tournament style bracket until there is only one champion. Much like Jackbox games, the player will use their phone as the controller and watch the action on a desktop device. If the player doesn't have access to a desktop, they can tilt the phone into landscape mode to see the desktop screen.
 <br>
-![foodstash](https://user-images.githubusercontent.com/19500679/39670024-25e3a836-50c9-11e8-943c-3f9887be8bda.png)
+![foodstash](RPS_Deathmatch/src/images/LOGO_RPS.png)
 
 ---
 
