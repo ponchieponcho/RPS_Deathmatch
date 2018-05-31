@@ -33,7 +33,7 @@
 * [React Router](https://github.com/ReactTraining/react-router)
 * [Redux](https://redux.js.org/)
 * [Node](https://nodejs.org/)
-* [Socket.io)](https://socket.io/)
+* [Socket.io](https://socket.io/)
 * [Express](https://expressjs.com/)
 
 
